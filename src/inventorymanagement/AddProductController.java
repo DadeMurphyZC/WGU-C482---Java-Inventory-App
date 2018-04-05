@@ -10,6 +10,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -21,6 +22,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import inventorymanagement.Product;
 
 /**
  * FXML Controller class
@@ -61,8 +63,24 @@ public class AddProductController implements Initializable {
     @FXML private TableColumn<Product, Integer> productPartInStock;
     
     @FXML
-    private void addpartCancel() throws IOException{
+    private void addproductCancel() throws IOException{
         Stage stage = (Stage) productCancelButton.getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+    
+    @FXML
+    private void addproduct(Event event) throws IOException{
+        Product tempProduct = new Product(Integer.parseInt(productIDField.getText()),
+            productNameField.getText(),
+            Double.parseDouble(productPriceField.getText()),
+            Integer.parseInt(productInvField.getText()),
+            Integer.parseInt(productMinField.getText()),
+            Integer.parseInt(productMaxField.getText()));
+        MainScreenController.productData.add(tempProduct);
+        Stage stage = (Stage) productSaveButton.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
