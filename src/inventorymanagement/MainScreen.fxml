@@ -88,8 +88,8 @@
                             </columns>
                         </TableView>
                         <Button fx:id="addProductButton" mnemonicParsing="false" onAction="#setAddProductScene" prefWidth="60.0" text="Add" translateX="135.0" GridPane.rowIndex="2" />
-                        <Button mnemonicParsing="false" prefWidth="60.0" text="Modify" translateX="200.0" GridPane.rowIndex="2" />
-                        <Button mnemonicParsing="false" prefWidth="60.0" text="Delete" translateX="265.0" GridPane.rowIndex="2" />
+                        <Button fx:id="editProductButton" mnemonicParsing="false" onAction="#setEditProductScene" prefWidth="60.0" text="Modify" translateX="200.0" GridPane.rowIndex="2" />
+                        <Button fx:id="deleteProductButton" mnemonicParsing="false" onAction="#deleteproduct" prefWidth="60.0" text="Delete" translateX="265.0" GridPane.rowIndex="2" />
                   <Button fx:id="clearSearchProductButton" mnemonicParsing="false" onAction="#clearProductSearch" prefHeight="25.0" prefWidth="52.0" text="Clear" translateX="150.0" />
                     </children>
                     <columnConstraints>
