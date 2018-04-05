@@ -62,7 +62,7 @@
                         </TableView>
                         <Button fx:id="productPartDeleteButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" text="Delete" translateX="310.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                   <Button fx:id="productSaveButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" text="Save" translateX="240.0" translateY="-10.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                  <Button fx:id="productCancelButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" text="Cancel" translateX="310.0" translateY="-10.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <Button fx:id="productCancelButton" mnemonicParsing="false" onAction="#addpartCancel" prefHeight="25.0" prefWidth="60.0" text="Cancel" translateX="310.0" translateY="-10.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                   <Label fx:id="productIDLabel" text="ID" translateX="25.0" translateY="-20.0" GridPane.rowIndex="1" />
                   <Label fx:id="productNameLabel" text="Name" translateX="25.0" translateY="20.0" GridPane.rowIndex="1" />
                   <Label fx:id="productInvLabel" text="Inv" translateX="25.0" translateY="60.0" GridPane.rowIndex="1" />
