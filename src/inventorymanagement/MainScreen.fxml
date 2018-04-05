@@ -77,8 +77,8 @@
                                 <Font name="Arial Rounded MT Bold" size="14.0" />
                             </font>
                         </Label>
-                        <Button alignment="CENTER_RIGHT" mnemonicParsing="false" text="Search" translateX="-125.0" GridPane.halignment="RIGHT" />
-                        <TextField maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="115.0" translateX="205.0" />
+                        <Button fx:id="searchProductButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#searchProduct" text="Search" translateX="-180.0" GridPane.halignment="RIGHT" />
+                        <TextField fx:id="searchProductField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="115.0" translateX="205.0" />
                         <TableView fx:id="productsTable" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
                             <columns>
                                 <TableColumn fx:id="productIDCol" prefWidth="75.0" text="Product ID" />
@@ -90,6 +90,7 @@
                         <Button fx:id="addProductButton" mnemonicParsing="false" onAction="#setAddProductScene" prefWidth="60.0" text="Add" translateX="135.0" GridPane.rowIndex="2" />
                         <Button mnemonicParsing="false" prefWidth="60.0" text="Modify" translateX="200.0" GridPane.rowIndex="2" />
                         <Button mnemonicParsing="false" prefWidth="60.0" text="Delete" translateX="265.0" GridPane.rowIndex="2" />
+                  <Button fx:id="clearSearchProductButton" mnemonicParsing="false" onAction="#clearProductSearch" prefHeight="25.0" prefWidth="52.0" text="Clear" translateX="150.0" />
                     </children>
                     <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
