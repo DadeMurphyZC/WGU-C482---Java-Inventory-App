@@ -12,12 +12,12 @@
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
     </columnConstraints>
     <rowConstraints>
-        <RowConstraints maxHeight="195.0" minHeight="10.0" prefHeight="51.0" vgrow="SOMETIMES" />
-        <RowConstraints maxHeight="341.0" minHeight="10.0" prefHeight="314.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="195.0" minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="380.0" minHeight="10.0" prefHeight="368.0" vgrow="SOMETIMES" />
     </rowConstraints>
 
     <children>
-        <Label fx:id="mainScreenLabel" text="Add Product">
+        <Label fx:id="mainScreenLabel" text="Add Product" translateY="25.0">
             <GridPane.margin>
                 <Insets left="25.0" />
             </GridPane.margin>
@@ -36,9 +36,9 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="127.0" minHeight="10.0" prefHeight="95.0" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="67.0" minHeight="0.0" prefHeight="27.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="127.0" minHeight="10.0" prefHeight="119.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="30.0" minHeight="0.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="127.0" minHeight="10.0" prefHeight="108.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="49.0" minHeight="0.0" prefHeight="26.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="53.0" minHeight="10.0" prefHeight="53.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                     <children>
                         <Button fx:id="productSearchButton" mnemonicParsing="false" text="Search" translateX="90.0" GridPane.columnIndex="1" />
@@ -61,8 +61,8 @@
                             </columns>
                         </TableView>
                         <Button fx:id="productPartDeleteButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" text="Delete" translateX="310.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  <Button fx:id="productSaveButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" text="Save" translateX="240.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                  <Button fx:id="productCancelButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" text="Cancel" translateX="310.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <Button fx:id="productSaveButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" text="Save" translateX="240.0" translateY="-10.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <Button fx:id="productCancelButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" text="Cancel" translateX="310.0" translateY="-10.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                   <Label fx:id="productIDLabel" text="ID" translateX="25.0" translateY="-20.0" GridPane.rowIndex="1" />
                   <Label fx:id="productNameLabel" text="Name" translateX="25.0" translateY="20.0" GridPane.rowIndex="1" />
                   <Label fx:id="productInvLabel" text="Inv" translateX="25.0" translateY="60.0" GridPane.rowIndex="1" />
