@@ -87,7 +87,7 @@
                                 <TableColumn fx:id="productPrice" prefWidth="74.0" text="Price" />
                             </columns>
                         </TableView>
-                        <Button fx:id="addProductButton" mnemonicParsing="false" prefWidth="60.0" text="Add" translateX="135.0" GridPane.rowIndex="2" />
+                        <Button fx:id="addProductButton" mnemonicParsing="false" onAction="#setAddProductScene" prefWidth="60.0" text="Add" translateX="135.0" GridPane.rowIndex="2" />
                         <Button mnemonicParsing="false" prefWidth="60.0" text="Modify" translateX="200.0" GridPane.rowIndex="2" />
                         <Button mnemonicParsing="false" prefWidth="60.0" text="Delete" translateX="265.0" GridPane.rowIndex="2" />
                     </children>
