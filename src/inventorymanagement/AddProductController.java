@@ -5,17 +5,22 @@
  */
 package inventorymanagement;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -54,15 +59,24 @@ public class AddProductController implements Initializable {
     @FXML private TableColumn<Product, String> productPartName;
     @FXML private TableColumn<Product, Double> productPartPrice;
     @FXML private TableColumn<Product, Integer> productPartInStock;
+    
+    @FXML
+    private void addpartCancel() throws IOException{
+        Stage stage = (Stage) productCancelButton.getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
 
     static ObservableList<Part> productPartsSearchResults = FXCollections.observableArrayList(
-//            new Part(1, "test", 3.99, 1,1,1),
-//            new Part(2,"test2",4.99,1,1,1)
+            new Part(1, "test", 3.99, 1,1,1),
+            new Part(2,"test2",4.99,1,1,1)
     );
 
     static ObservableList<Part> productParts = FXCollections.observableArrayList(
-//            new Part(1, "test", 3.99, 1,1,1),
-//            new Part(2,"test2",4.99,1,1,1)
+            new Part(1, "test", 3.99, 1,1,1),
+            new Part(2,"test2",4.99,1,1,1)
     );
 
     /**
