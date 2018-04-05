@@ -49,8 +49,8 @@ public class Inventory {
         this.allParts = allParts;
     }
     
-    public Product lookupProduct(int id){
-       for(Product p: products){
+    public static Product lookupProduct(int id){
+       for(Product p: MainScreenController.productData){
            if(p.getProductID() == id){
                return p;
            }
