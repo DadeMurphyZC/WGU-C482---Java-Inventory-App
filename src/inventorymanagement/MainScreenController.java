@@ -10,12 +10,10 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -24,12 +22,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import inventorymanagement.Inventory;
-import static inventorymanagement.Inventory.getAllParts;
 import static inventorymanagement.Inventory.lookupPart;
-
 
 /**
  * FXML Controller class
@@ -37,36 +31,52 @@ import static inventorymanagement.Inventory.lookupPart;
  * @author cris
  */
 public class MainScreenController implements Initializable {
-    
+
     private static int tempPartIndex;
 
     public static int getTempPartIndex() {
         return tempPartIndex;
     }
-    
-    
-    @FXML private Label mainScreenLabel;
-    @FXML private Button addPartButton;
-    @FXML private Button addProductButton;
-    @FXML private Button editPartButton;
-    @FXML private Button searchPartButton;
-    @FXML private Button clearSearchPartButton;
-    @FXML private TextField searchField;
-    
-    @FXML private TableView<Part> partsTable;
-    @FXML private TableColumn<Part, Integer> partIDCol;
-    @FXML private TableColumn<Part, String> name;
-    @FXML private TableColumn<Part, Double> price;
-    @FXML private TableColumn<Part, Integer> inStock;
-    
-    @FXML private TableView<Product> productsTable;
-    @FXML private TableColumn<Product, Integer> productIDCol;
-    @FXML private TableColumn<Product, String> productName;
-    @FXML private TableColumn<Product, Double> productPrice;
-    @FXML private TableColumn<Product, Integer> productinStock;
-    
+
+    @FXML
+    private Label mainScreenLabel;
+    @FXML
+    private Button addPartButton;
+    @FXML
+    private Button addProductButton;
+    @FXML
+    private Button editPartButton;
+    @FXML
+    private Button searchPartButton;
+    @FXML
+    private Button clearSearchPartButton;
+    @FXML
+    private TextField searchField;
+
+    @FXML
+    private TableView<Part> partsTable;
+    @FXML
+    private TableColumn<Part, Integer> partIDCol;
+    @FXML
+    private TableColumn<Part, String> name;
+    @FXML
+    private TableColumn<Part, Double> price;
+    @FXML
+    private TableColumn<Part, Integer> inStock;
+
+    @FXML
+    private TableView<Product> productsTable;
+    @FXML
+    private TableColumn<Product, Integer> productIDCol;
+    @FXML
+    private TableColumn<Product, String> productName;
+    @FXML
+    private TableColumn<Product, Double> productPrice;
+    @FXML
+    private TableColumn<Product, Integer> productinStock;
+
     //MAPS THE ADD BUTTON TO setAddPartScene AND CHANGES TO THE Add Part VIEW
-    @FXML 
+    @FXML
     private void setAddPartScene(Event event) throws IOException {
         Stage stage = (Stage) addPartButton.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("AddPart.fxml"));
@@ -74,7 +84,7 @@ public class MainScreenController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-    
+
     @FXML
     void setEditPartScene(Event event) throws IOException {
         tempPartIndex = partsTable.getSelectionModel().getSelectedIndex();
@@ -83,9 +93,9 @@ public class MainScreenController implements Initializable {
         Parent root = FXMLLoader.load(getClass().getResource("EditPart.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
-        stage.show();   
+        stage.show();
     }
-    
+
     @FXML
     private void setAddProductScene(Event event) throws IOException {
         Stage stage = (Stage) addProductButton.getScene().getWindow();
@@ -94,71 +104,73 @@ public class MainScreenController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-    
+
     @FXML
     private void deletepart(Event event) throws IOException {
         tempPartIndex = partsTable.getSelectionModel().getSelectedIndex();
         System.out.println("Index " + tempPartIndex + " deleted.");
-        if(data.contains(data.get(tempPartIndex))){
+        if (data.contains(data.get(tempPartIndex))) {
             data.remove(tempPartIndex);
         }
         partsTable.setItems(data);
     }
-    
+
     @FXML
     private void searchPart() {
         int search = Integer.parseInt(searchField.getText());
         System.out.println(search);
         Part tempPart = lookupPart(search);
         System.out.println(tempPart);
-        if(tempPart!=null){
-            ObservableList<Part> searchTable = 
-                    FXCollections.observableArrayList(new Part(tempPart.getPartID(),
-                    tempPart.getName(),
-                    tempPart.getPrice(),
-                    tempPart.getInStock(),
-                    tempPart.getMin(),
-                    tempPart.getMax()));
+        if (tempPart != null) {
+            ObservableList<Part> searchTable
+                    = FXCollections.observableArrayList(new Part(tempPart.getPartID(),
+                            tempPart.getName(),
+                            tempPart.getPrice(),
+                            tempPart.getInStock(),
+                            tempPart.getMin(),
+                            tempPart.getMax()));
             partsTable.setItems(searchTable);
         }
     }
-    
+
     @FXML
     private void clearPartSearch() {
         searchField.setText("");
         partsTable.setItems(data);
     }
-    
+
     static ObservableList<Part> data = FXCollections.observableArrayList(
-//            new Part(1, "test", 3.99, 1,1,1),
-//            new Part(2,"test2",4.99,1,1,1)
-            );
-        
+            new Part(1, "test", 3.99, 1, 1, 1),
+            new Part(2, "test2", 4.99, 1, 1, 1)
+    );
+
     static ObservableList<Product> productData = FXCollections.observableArrayList(
-        new Product(1, "test", 3.99, 1,1,1),
-        new Product(2,"test2",4.99,1,1,1)
-        );
-        
-        
+            new Product(1, "test", 3.99, 1, 1, 1),
+            new Product(2, "test2", 4.99, 1, 1, 1)
+    );
+
     /**
      * Initializes the controller class.
+     *
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        partIDCol.setCellValueFactory(new PropertyValueFactory<Part, Integer>("partID"));
-        name.setCellValueFactory(new PropertyValueFactory<Part, String>("name"));
-        price.setCellValueFactory(new PropertyValueFactory<Part, Double>("price"));
-        inStock.setCellValueFactory(new PropertyValueFactory<Part, Integer>("inStock"));
-        
-        productIDCol.setCellValueFactory(new PropertyValueFactory<Product, Integer>("productID"));
-        productName.setCellValueFactory(new PropertyValueFactory<Product, String>("name"));
-        productPrice.setCellValueFactory(new PropertyValueFactory<Product, Double>("price"));
-        productinStock.setCellValueFactory(new PropertyValueFactory<Product, Integer>("inStock"));
+        partIDCol.setCellValueFactory(new PropertyValueFactory<>("partID"));
+        name.setCellValueFactory(new PropertyValueFactory<>("name"));
+        price.setCellValueFactory(new PropertyValueFactory<>("price"));
+        inStock.setCellValueFactory(new PropertyValueFactory<>("inStock"));
+
+        productIDCol.setCellValueFactory(new PropertyValueFactory<>("productID"));
+        productName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        productPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
+        productinStock.setCellValueFactory(new PropertyValueFactory<>("inStock"));
 
         partsTable.setItems(data);
         productsTable.setItems(productData);
 
-      // TODO
+        // TODO
     }
-    
+
 }
