@@ -24,6 +24,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import static inventorymanagement.Inventory.lookupPart;
+import static inventorymanagement.Inventory.lookupProduct;
 
 /**
  * FXML Controller class
@@ -33,47 +34,32 @@ import static inventorymanagement.Inventory.lookupPart;
 public class MainScreenController implements Initializable {
 
     private static int tempPartIndex;
-
     public static int getTempPartIndex() {
         return tempPartIndex;
     }
 
-    @FXML
-    private Label mainScreenLabel;
-    @FXML
-    private Button addPartButton;
-    @FXML
-    private Button addProductButton;
-    @FXML
-    private Button editPartButton;
-    @FXML
-    private Button searchPartButton;
-    @FXML
-    private Button clearSearchPartButton;
-    @FXML
-    private TextField searchField;
+    @FXML private Label mainScreenLabel;
+    @FXML private Button addPartButton;
+    @FXML private Button addProductButton;
+    @FXML private Button editPartButton;
+    @FXML private Button searchPartButton;
+    @FXML private Button clearSearchPartButton;
+    @FXML private TextField searchField;
+    @FXML private TextField searchProductField;
+    @FXML private Button searchProductButton;
+    @FXML private Button clearSearchProductButton;
 
-    @FXML
-    private TableView<Part> partsTable;
-    @FXML
-    private TableColumn<Part, Integer> partIDCol;
-    @FXML
-    private TableColumn<Part, String> name;
-    @FXML
-    private TableColumn<Part, Double> price;
-    @FXML
-    private TableColumn<Part, Integer> inStock;
+    @FXML private TableView<Part> partsTable;
+    @FXML private TableColumn<Part, Integer> partIDCol;
+    @FXML private TableColumn<Part, String> name;
+    @FXML private TableColumn<Part, Double> price;
+    @FXML private TableColumn<Part, Integer> inStock;
 
-    @FXML
-    private TableView<Product> productsTable;
-    @FXML
-    private TableColumn<Product, Integer> productIDCol;
-    @FXML
-    private TableColumn<Product, String> productName;
-    @FXML
-    private TableColumn<Product, Double> productPrice;
-    @FXML
-    private TableColumn<Product, Integer> productinStock;
+    @FXML private TableView<Product> productsTable;
+    @FXML private TableColumn<Product, Integer> productIDCol;
+    @FXML private TableColumn<Product, String> productName;
+    @FXML private TableColumn<Product, Double> productPrice;
+    @FXML private TableColumn<Product, Integer> productinStock;
 
     //MAPS THE ADD BUTTON TO setAddPartScene AND CHANGES TO THE Add Part VIEW
     @FXML
@@ -118,9 +104,7 @@ public class MainScreenController implements Initializable {
     @FXML
     private void searchPart() {
         int search = Integer.parseInt(searchField.getText());
-        System.out.println(search);
         Part tempPart = lookupPart(search);
-        System.out.println(tempPart);
         if (tempPart != null) {
             ObservableList<Part> searchTable
                     = FXCollections.observableArrayList(new Part(tempPart.getPartID(),
@@ -132,11 +116,34 @@ public class MainScreenController implements Initializable {
             partsTable.setItems(searchTable);
         }
     }
+    
+    @FXML
+    private void searchProduct() {
+        int search = Integer.parseInt(searchProductField.getText());
+        System.out.println(search);
+        Product tempProduct = lookupProduct(search);
+        if (tempProduct != null) {
+            ObservableList<Product> searchProductTable 
+                    = FXCollections.observableArrayList(new Product(tempProduct.getProductID(),
+                            tempProduct.getName(),
+                            tempProduct.getPrice(),
+                            tempProduct.getInStock(),
+                            tempProduct.getMin(),
+                            tempProduct.getMax()));
+            productsTable.setItems(searchProductTable);
+        }
+    }
 
     @FXML
     private void clearPartSearch() {
         searchField.setText("");
         partsTable.setItems(data);
+    }
+    
+    @FXML
+    private void clearProductSearch() {
+        searchProductField.setText("");
+        productsTable.setItems(productData);
     }
 
     static ObservableList<Part> data = FXCollections.observableArrayList(
