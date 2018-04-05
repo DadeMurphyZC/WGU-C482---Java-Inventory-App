@@ -73,6 +73,15 @@ public class AddPartController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
+    
+    @FXML
+    private void addpartCancel() throws IOException{
+        Stage stage = (Stage) addpartcancel.getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
 
     /**
      * Initializes the controller class.
