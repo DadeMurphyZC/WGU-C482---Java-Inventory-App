@@ -33,7 +33,7 @@ public class Inventory {
         return true;
     }
 
-    public ArrayList<Product> getProducts() {
+    public static ArrayList<Product> getProducts() {
         return products;
     }
 
