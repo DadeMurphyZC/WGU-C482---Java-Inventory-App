@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="782.0" style="-fx-background-color: lightgray;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="inventorymanagement.MainScreenController">
+    <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints maxHeight="195.0" minHeight="10.0" prefHeight="68.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="341.0" minHeight="10.0" prefHeight="332.0" vgrow="SOMETIMES" />
+    </rowConstraints>
+    
+    <children>
+        <Label fx:id="mainScreenLabel" text="Inventory Management System">
+            <GridPane.margin>
+                <Insets left="25.0" />
+            </GridPane.margin>
+            <font>
+                <Font name="Arial Rounded MT Bold" size="14.0" />
+            </font>
+        </Label>
+        
+        
+        <Pane prefHeight="222.0" prefWidth="351.0" style="-fx-border-color: darkgrey; -fx-border-radius: 5 5 5 5;" GridPane.rowIndex="1">
+            <GridPane.margin>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            </GridPane.margin>
+            <children>
+                <GridPane layoutX="14.0" layoutY="14.0" prefHeight="261.0" prefWidth="326.0">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints maxHeight="82.0" minHeight="4.0" prefHeight="41.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="213.0" minHeight="10.0" prefHeight="177.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="53.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <Label text="Parts">
+                            <font>
+                                <Font name="Arial Rounded MT Bold" size="14.0" />
+                            </font>
+                        </Label>
+                        <Button fx:id="searchPartButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#searchPart" text="Search" translateX="-180.0" GridPane.halignment="RIGHT" />
+                        <TextField fx:id="searchField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="115.0" translateX="205.0" />
+                        <TableView fx:id="partsTable" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+                            <columns>
+                                <TableColumn fx:id="partIDCol" prefWidth="75.0" text="Part ID" />
+                                <TableColumn fx:id="name" prefWidth="75.0" text="Part Name" />
+                                <TableColumn fx:id="inStock" prefWidth="101.0" text="Inventory" />
+                                <TableColumn fx:id="price" prefWidth="74.0" text="Price" />
+                            </columns>
+                        </TableView>
+                        <Button fx:id="addPartButton" mnemonicParsing="false" onAction="#setAddPartScene" prefWidth="60.0" text="Add" translateX="135.0" GridPane.rowIndex="2" />
+                        <Button fx:id="editPartButton" mnemonicParsing="false" onAction="#setEditPartScene" prefWidth="60.0" text="Modify" translateX="200.0" GridPane.rowIndex="2" />
+                        <Button mnemonicParsing="false" onAction="#deletepart" prefWidth="60.0" text="Delete" translateX="265.0" GridPane.rowIndex="2" />
+                  <Button fx:id="clearSearchPartButton" mnemonicParsing="false" onAction="#clearPartSearch" prefHeight="25.0" prefWidth="52.0" text="Clear" translateX="150.0" />
+                    </children>
+                </GridPane>
+            </children>
+        </Pane>
+        
+        
+        <Pane layoutX="30.0" layoutY="98.0" prefHeight="222.0" prefWidth="351.0" style="-fx-border-color: darkgrey; -fx-border-radius: 5 5 5 5;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <children>
+                <GridPane layoutX="14.0" layoutY="14.0" prefHeight="261.0" prefWidth="326.0">
+                    <children>
+                        <Label text="Products">
+                            <font>
+                                <Font name="Arial Rounded MT Bold" size="14.0" />
+                            </font>
+                        </Label>
+                        <Button alignment="CENTER_RIGHT" mnemonicParsing="false" text="Search" translateX="-125.0" GridPane.halignment="RIGHT" />
+                        <TextField maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="115.0" translateX="205.0" />
+                        <TableView fx:id="productsTable" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+                            <columns>
+                                <TableColumn fx:id="productIDCol" prefWidth="75.0" text="Product ID" />
+                                <TableColumn fx:id="productName" prefWidth="100.0" text="Product Name" />
+                                <TableColumn fx:id="productinStock" prefWidth="76.0" text="Inventory" />
+                                <TableColumn fx:id="productPrice" prefWidth="74.0" text="Price" />
+                            </columns>
+                        </TableView>
+                        <Button fx:id="addProductButton" mnemonicParsing="false" prefWidth="60.0" text="Add" translateX="135.0" GridPane.rowIndex="2" />
+                        <Button mnemonicParsing="false" prefWidth="60.0" text="Modify" translateX="200.0" GridPane.rowIndex="2" />
+                        <Button mnemonicParsing="false" prefWidth="60.0" text="Delete" translateX="265.0" GridPane.rowIndex="2" />
+                    </children>
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints maxHeight="82.0" minHeight="4.0" prefHeight="41.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="213.0" minHeight="10.0" prefHeight="177.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="53.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                </GridPane>
+            </children>
+            <GridPane.margin>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            </GridPane.margin>
+        </Pane>
+        
+        
+    </children>
+</GridPane>
