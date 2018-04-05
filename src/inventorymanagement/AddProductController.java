@@ -23,7 +23,7 @@ import javafx.scene.control.TextField;
  * @author cfonseca
  */
 public class AddProductController implements Initializable {
-    
+
     @FXML private Button productSearchButton;
     @FXML private TextField productSearchField;
     @FXML private Button productPartAddButton;
@@ -36,35 +36,41 @@ public class AddProductController implements Initializable {
     @FXML Label productPriceLabel;
     @FXML Label productMaxLabel;
     @FXML Label productMinLabel;
-    
+    @FXML TextField productIDField;
+    @FXML TextField productNameField;
+    @FXML TextField productInvField;
+    @FXML TextField productPriceField;
+    @FXML TextField productMaxField;
+    @FXML TextField productMinField;
+
     @FXML private TableView<Product> productPartsSearchResultsTable;
     @FXML private TableColumn<Product, Integer> productID;
     @FXML private TableColumn<Product, String> productName;
     @FXML private TableColumn<Product, Double> productPrice;
     @FXML private TableColumn<Product, Integer> productInStock;
-    
+
     @FXML private TableView<Product> productPartsTable;
     @FXML private TableColumn<Product, Integer> productPartID;
     @FXML private TableColumn<Product, String> productPartName;
     @FXML private TableColumn<Product, Double> productPartPrice;
     @FXML private TableColumn<Product, Integer> productPartInStock;
-    
+
     static ObservableList<Part> productPartsSearchResults = FXCollections.observableArrayList(
 //            new Part(1, "test", 3.99, 1,1,1),
 //            new Part(2,"test2",4.99,1,1,1)
-            );
-    
+    );
+
     static ObservableList<Part> productParts = FXCollections.observableArrayList(
 //            new Part(1, "test", 3.99, 1,1,1),
 //            new Part(2,"test2",4.99,1,1,1)
-            );
-    
+    );
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-    
+    }
+
 }
