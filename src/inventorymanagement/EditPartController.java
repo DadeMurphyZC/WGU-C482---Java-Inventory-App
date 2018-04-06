@@ -79,6 +79,15 @@ public class EditPartController implements Initializable {
     }
     
     @FXML
+    private void editpartCancel() throws IOException{
+        Stage stage = (Stage) editpartcancel.getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+    
+    @FXML
     private void deletepart(Event event) throws IOException{
         if(MainScreenController.data.contains(tempPart)){
             MainScreenController.data.remove(tempPart);
