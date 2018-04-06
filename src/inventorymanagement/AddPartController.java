@@ -25,6 +25,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import static inventorymanagement.Validator.isminmaxValid;
+import static inventorymanagement.Validator.showAlert;
 
 /**
  * FXML Controller class
@@ -58,9 +60,12 @@ public class AddPartController implements Initializable {
         }
     }
     
+    
     @FXML
     private void addpart(Event event) throws IOException{
-        Part tempPart = new Part(Integer.parseInt(addpartId.getText()),
+        boolean minmaxvalid = Validator.isminmaxValid(addpartMin, addpartMax);
+        if(minmaxvalid == true){
+            Part tempPart = new Part(Integer.parseInt(addpartId.getText()),
             addpartName.getText(),
             Double.parseDouble(addpartPrice.getText()),
             Integer.parseInt(addpartInv.getText()),
@@ -72,6 +77,10 @@ public class AddPartController implements Initializable {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+        } else {
+            Validator.showAlert("MIN value cannot be greater than MAX value.");
+        }
+        
     }
     
     @FXML
