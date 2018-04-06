@@ -69,12 +69,12 @@
                   <Label fx:id="productPriceLabel" text="Price" translateX="25.0" translateY="100.0" GridPane.rowIndex="1" />
                   <Label fx:id="productMaxLabel" text="Max" translateX="25.0" translateY="140.0" GridPane.rowIndex="1" />
                   <Label fx:id="productMinLabel" text="Min" translateX="175.0" translateY="140.0" GridPane.rowIndex="1" />
-                  <TextField fx:id="productIDField" maxHeight="-Infinity" maxWidth="-Infinity" promptText="ID" translateX="75.0" translateY="-20.0" GridPane.rowIndex="1" />
-                  <TextField fx:id="productNameField" maxHeight="-Infinity" maxWidth="-Infinity" promptText="Product Name" translateX="75.0" translateY="20.0" GridPane.rowIndex="1" />
-                  <TextField fx:id="productInvField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="75.0" promptText="Inv" translateX="75.0" translateY="60.0" GridPane.rowIndex="1" />
-                  <TextField fx:id="productPriceField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="75.0" promptText="Price" translateX="75.0" translateY="100.0" GridPane.rowIndex="1" />
-                  <TextField fx:id="productMaxField" maxWidth="-Infinity" prefHeight="25.0" prefWidth="75.0" promptText="Max" translateX="75.0" translateY="140.0" GridPane.rowIndex="1" />
-                  <TextField fx:id="productMinField" maxWidth="-Infinity" prefHeight="25.0" prefWidth="75.0" promptText="Min" translateX="215.0" translateY="140.0" GridPane.rowIndex="1" />
+                  <TextField fx:id="editproductIDField" maxHeight="-Infinity" maxWidth="-Infinity" promptText="ID" translateX="75.0" translateY="-20.0" GridPane.rowIndex="1" />
+                  <TextField fx:id="editproductNameField" maxHeight="-Infinity" maxWidth="-Infinity" promptText="Product Name" translateX="75.0" translateY="20.0" GridPane.rowIndex="1" />
+                  <TextField fx:id="editproductInvField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="75.0" promptText="Inv" translateX="75.0" translateY="60.0" GridPane.rowIndex="1" />
+                  <TextField fx:id="editproductPriceField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="75.0" promptText="Price" translateX="75.0" translateY="100.0" GridPane.rowIndex="1" />
+                  <TextField fx:id="editproductMaxField" maxWidth="-Infinity" prefHeight="25.0" prefWidth="75.0" promptText="Max" translateX="75.0" translateY="140.0" GridPane.rowIndex="1" />
+                  <TextField fx:id="editproductMinField" maxWidth="-Infinity" prefHeight="25.0" prefWidth="75.0" promptText="Min" translateX="215.0" translateY="140.0" GridPane.rowIndex="1" />
                     </children>
                 </GridPane>
             </children>
