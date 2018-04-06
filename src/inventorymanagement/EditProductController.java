@@ -10,11 +10,17 @@ import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
 import inventorymanagement.Inventory;
 import static inventorymanagement.Inventory.getProducts;
-import static inventorymanagement.MainScreenController.getTempPartIndex;
+import static inventorymanagement.MainScreenController.getTempProductIndex;
+import java.io.IOException;
+import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -26,7 +32,6 @@ import javafx.scene.control.TextField;
 
 public class EditProductController implements Initializable {
 
-    static Product tempProduct;
 
 @FXML private Button productSearchButton;
     @FXML private TextField productSearchField;
@@ -47,12 +52,41 @@ public class EditProductController implements Initializable {
     @FXML TextField editproductMaxField;
     @FXML TextField editproductMinField;
     
+    static Product tempProduct;
+    
+    @FXML
+    private void editproduct(Event event) throws IOException{
+        if(MainScreenController.productData.contains(tempProduct)) {
+            tempProduct = new Product(Integer.parseInt(editproductIDField.getText()),
+                                      editproductNameField.getText(),
+                                      Double.parseDouble(editproductPriceField.getText()),
+                                      Integer.parseInt(editproductInvField.getText()),
+                                      Integer.parseInt(editproductMinField.getText()),
+                                      Integer.parseInt(editproductMaxField.getText()));
+            MainScreenController.productData.add(tempProduct);
+            Stage stage = (Stage) productSaveButton.getScene().getWindow();
+            Parent root = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        }
+    }
+    
+    @FXML
+    private void addproductCancel() throws IOException{
+        Stage stage = (Stage) productCancelButton.getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        tempProduct = MainScreenController.productData.get(MainScreenController.getTempPartIndex());
+        tempProduct = MainScreenController.productData.get(MainScreenController.getTempProductIndex());
         System.out.println(tempProduct.getName() + " " + tempProduct.getProductID());
         editproductIDField.setText(String.valueOf(tempProduct.getProductID()));
         editproductNameField.setText(tempProduct.getName());
