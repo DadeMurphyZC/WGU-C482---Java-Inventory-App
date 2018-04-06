@@ -25,6 +25,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import static inventorymanagement.Inventory.lookupPart;
 import static inventorymanagement.Inventory.lookupProduct;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
+import java.util.Optional;
 
 /**
  * FXML Controller class
@@ -114,11 +118,12 @@ public class MainScreenController implements Initializable {
     @FXML
     private void deletepart(Event event) throws IOException {
         tempPartIndex = partsTable.getSelectionModel().getSelectedIndex();
-        System.out.println("Index " + tempPartIndex + " deleted.");
-        if (data.contains(data.get(tempPartIndex))) {
-            data.remove(tempPartIndex);
-        }
+        if(Confirm.delete()==true){
+            if (data.contains(data.get(tempPartIndex))) {
+                data.remove(tempPartIndex);
+            }
         partsTable.setItems(data);
+        }
     }
     
     @FXML
