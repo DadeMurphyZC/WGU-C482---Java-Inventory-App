@@ -37,6 +37,12 @@ public class MainScreenController implements Initializable {
     public static int getTempPartIndex() {
         return tempPartIndex;
     }
+    
+    private static int tempProductIndex;
+    public static int getTempProductIndex() {
+        return tempProductIndex;
+    }
+    
 
     @FXML private Label mainScreenLabel;
     @FXML private Button addPartButton;
@@ -86,9 +92,10 @@ public class MainScreenController implements Initializable {
     
     @FXML
     void setEditProductScene(Event event) throws IOException {
-        tempPartIndex = productsTable.getSelectionModel().getSelectedIndex();
+        tempProductIndex = productsTable.getSelectionModel().getSelectedIndex();
+        System.out.println(tempProductIndex);
         Stage stage = (Stage) editProductButton.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("AddProduct.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("EditProduct.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
@@ -116,9 +123,9 @@ public class MainScreenController implements Initializable {
     
     @FXML
     private void deleteproduct(Event event) throws IOException {
-        tempPartIndex = productsTable.getSelectionModel().getSelectedIndex();
-        if (productData.contains(productData.get(tempPartIndex))) {
-            productData.remove(tempPartIndex);
+        tempProductIndex = productsTable.getSelectionModel().getSelectedIndex();
+        if (productData.contains(productData.get(tempProductIndex))) {
+            productData.remove(tempProductIndex);
         }
         productsTable.setItems(productData);
     }
