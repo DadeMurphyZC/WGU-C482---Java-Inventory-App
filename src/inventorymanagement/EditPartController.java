@@ -18,9 +18,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
-import inventorymanagement.Inventory;
-import static inventorymanagement.Inventory.getAllParts;
-import static inventorymanagement.MainScreenController.getTempPartIndex;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -36,55 +33,78 @@ import javafx.stage.Stage;
  */
 public class EditPartController implements Initializable {
 
-    
-    @FXML private Label mainScreenLabel;
-    @FXML private ToggleGroup edittoggle;
-    @FXML private Button editpartsave;
-    @FXML private Button editpartcancel;
-    @FXML private Label editpartchoicelabel;
-    @FXML private RadioButton editpartinhouse;
-    @FXML private RadioButton editpartoutsourced;
-    @FXML private TextField editpartId;
-    @FXML private TextField editpartName;
-    @FXML private TextField editpartInv;
-    @FXML private TextField editpartPrice;
-    @FXML private TextField editpartMax;
-    @FXML private TextField editpartMin;
-    @FXML private TextField editpartCName; 
-    
-    @FXML private TableView<Part> productPartsSearchResultsTable;
-    @FXML private TableColumn<Part, Integer> productID;
-    @FXML private TableColumn<Part, String> productName;
-    @FXML private TableColumn<Part, Double> productPrice;
-    @FXML private TableColumn<Part, Integer> productInStock;
-
-    @FXML private TableView<Part> productPartsTable;
-    @FXML private TableColumn<Part, Integer> productPartID;
-    @FXML private TableColumn<Part, String> productPartName;
-    @FXML private TableColumn<Part, Double> productPartPrice;
-    @FXML private TableColumn<Part, Integer> productPartInStock;
-    
-    static Part tempPart;
-    
     @FXML
-    private void editpartradioswitch(ActionEvent event){
-        if(editpartinhouse.isSelected()){
+    private Label mainScreenLabel;
+    @FXML
+    private ToggleGroup edittoggle;
+    @FXML
+    private Button editpartsave;
+    @FXML
+    private Button editpartcancel;
+    @FXML
+    private Label editpartchoicelabel;
+    @FXML
+    private RadioButton editpartinhouse;
+    @FXML
+    private RadioButton editpartoutsourced;
+    @FXML
+    private TextField editpartId;
+    @FXML
+    private TextField editpartName;
+    @FXML
+    private TextField editpartInv;
+    @FXML
+    private TextField editpartPrice;
+    @FXML
+    private TextField editpartMax;
+    @FXML
+    private TextField editpartMin;
+    @FXML
+    private TextField editpartCName;
+
+    @FXML
+    private TableView<Part> productPartsSearchResultsTable;
+    @FXML
+    private TableColumn<Part, Integer> productID;
+    @FXML
+    private TableColumn<Part, String> productName;
+    @FXML
+    private TableColumn<Part, Double> productPrice;
+    @FXML
+    private TableColumn<Part, Integer> productInStock;
+
+    @FXML
+    private TableView<Part> productPartsTable;
+    @FXML
+    private TableColumn<Part, Integer> productPartID;
+    @FXML
+    private TableColumn<Part, String> productPartName;
+    @FXML
+    private TableColumn<Part, Double> productPartPrice;
+    @FXML
+    private TableColumn<Part, Integer> productPartInStock;
+
+    static Part tempPart;
+
+    @FXML
+    private void editpartradioswitch(ActionEvent event) {
+        if (editpartinhouse.isSelected()) {
             editpartchoicelabel.setText("Machine ID");
         }
-        if(editpartoutsourced.isSelected()) {
+        if (editpartoutsourced.isSelected()) {
             editpartchoicelabel.setText("Company Name");
         }
     }
-    
+
     @FXML
-    private void editpart(Event event) throws IOException{
-        if(MainScreenController.data.contains(tempPart)) {
+    private void editpart(Event event) throws IOException {
+        if (MainScreenController.data.contains(tempPart)) {
             tempPart = new Part(Integer.parseInt(editpartId.getText()),
-                                editpartName.getText(),
-                                Integer.parseInt(editpartInv.getText()), 
-                                (int) Double.parseDouble(editpartPrice.getText()),
-                                Integer.parseInt(editpartMax.getText()),
-                                Integer.parseInt(editpartMin.getText()));
+                    editpartName.getText(),
+                    Integer.parseInt(editpartInv.getText()),
+                    (int) Double.parseDouble(editpartPrice.getText()),
+                    Integer.parseInt(editpartMax.getText()),
+                    Integer.parseInt(editpartMin.getText()));
             MainScreenController.data.set(MainScreenController.getTempPartIndex(), tempPart);
             Stage stage = (Stage) editpartsave.getScene().getWindow();
             Parent root = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
@@ -93,19 +113,19 @@ public class EditPartController implements Initializable {
             stage.show();
         }
     }
-    
+
     @FXML
-    private void editpartCancel() throws IOException{
+    private void editpartCancel() throws IOException {
         Stage stage = (Stage) editpartcancel.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
-    
+
     @FXML
-    private void deletepart(Event event) throws IOException{
-        if(MainScreenController.data.contains(tempPart)){
+    private void deletepart(Event event) throws IOException {
+        if (MainScreenController.data.contains(tempPart)) {
             MainScreenController.data.remove(tempPart);
         }
         Stage stage = (Stage) editpartsave.getScene().getWindow();
@@ -114,9 +134,11 @@ public class EditPartController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-    
+
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -138,7 +160,7 @@ public class EditPartController implements Initializable {
         productPartPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
         productPartInStock.setCellValueFactory(new PropertyValueFactory<>("inStock"));
         productPartsTable.setItems(productParts);
-        
-    }    
-    
+
+    }
+
 }
