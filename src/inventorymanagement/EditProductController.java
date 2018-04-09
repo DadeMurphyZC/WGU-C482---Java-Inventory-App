@@ -5,6 +5,7 @@
  */
 package inventorymanagement;
 
+import static inventorymanagement.AddProductController.productParts;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
@@ -19,8 +20,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import static inventorymanagement.MainScreenController.selectedProduct;
 
 /**
  * FXML Controller class
@@ -51,6 +56,18 @@ public class EditProductController implements Initializable {
     @FXML TextField editproductPriceField;
     @FXML TextField editproductMaxField;
     @FXML TextField editproductMinField;
+    
+    @FXML private TableView<Part> productPartsSearchResultsTable;
+    @FXML private TableColumn<Part, Integer> productID;
+    @FXML private TableColumn<Part, String> productName;
+    @FXML private TableColumn<Part, Double> productPrice;
+    @FXML private TableColumn<Part, Integer> productInStock;
+
+    @FXML private TableView<Part> productPartsTable;
+    @FXML private TableColumn<Part, Integer> productPartID;
+    @FXML private TableColumn<Part, String> productPartName;
+    @FXML private TableColumn<Part, Double> productPartPrice;
+    @FXML private TableColumn<Part, Integer> productPartInStock;
     
     static Product tempProduct;
     
@@ -87,13 +104,24 @@ public class EditProductController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         tempProduct = MainScreenController.productData.get(MainScreenController.getTempProductIndex());
-        System.out.println(tempProduct.getName() + " " + tempProduct.getProductID());
+        System.out.println("Selected product is: " + selectedProduct.name);
+        System.out.println("Selected product associated parts are: " + selectedProduct.getAssociatedParts());
+        productPartsTable.setItems(selectedProduct.getAssociatedParts());
         editproductIDField.setText(String.valueOf(tempProduct.getProductID()));
         editproductNameField.setText(tempProduct.getName());
         editproductInvField.setText(Integer.toString(tempProduct.getInStock()));
         editproductPriceField.setText(Double.toString(tempProduct.getPrice()));
         editproductMaxField.setText(Integer.toString(tempProduct.getMax()));
         editproductMinField.setText(Integer.toString(tempProduct.getMin()));
+        productID.setCellValueFactory(new PropertyValueFactory<>("partID"));
+        productName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        productPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
+        productInStock.setCellValueFactory(new PropertyValueFactory<>("inStock"));
+        productPartsSearchResultsTable.setItems(MainScreenController.data);
+        productPartID.setCellValueFactory(new PropertyValueFactory<>("partID"));
+        productPartName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        productPartPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
+        productPartInStock.setCellValueFactory(new PropertyValueFactory<>("inStock"));
     }    
     
 }
