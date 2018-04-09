@@ -5,13 +5,9 @@
  */
 package inventorymanagement;
 
-import static inventorymanagement.AddProductController.productParts;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
-import inventorymanagement.Inventory;
-import static inventorymanagement.Inventory.getProducts;
-import static inventorymanagement.MainScreenController.getTempProductIndex;
 import java.io.IOException;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -32,54 +28,78 @@ import static inventorymanagement.MainScreenController.selectedProduct;
  *
  * @author cfonseca
  */
-
-
-
 public class EditProductController implements Initializable {
-
-
-@FXML private Button productSearchButton;
-    @FXML private TextField productSearchField;
-    @FXML private Button productPartAddButton;
-    @FXML private Button productPartDeleteButton;
-    @FXML private Button productSaveButton;
-    @FXML private Button productCancelButton;
-    @FXML Label productIDLabel;
-    @FXML Label productNameLabel;
-    @FXML Label productInvLabel;
-    @FXML Label productPriceLabel;
-    @FXML Label productMaxLabel;
-    @FXML Label productMinLabel;
-    @FXML TextField editproductIDField;
-    @FXML TextField editproductNameField;
-    @FXML TextField editproductInvField;
-    @FXML TextField editproductPriceField;
-    @FXML TextField editproductMaxField;
-    @FXML TextField editproductMinField;
     
-    @FXML private TableView<Part> productPartsSearchResultsTable;
-    @FXML private TableColumn<Part, Integer> productID;
-    @FXML private TableColumn<Part, String> productName;
-    @FXML private TableColumn<Part, Double> productPrice;
-    @FXML private TableColumn<Part, Integer> productInStock;
-
-    @FXML private TableView<Part> productPartsTable;
-    @FXML private TableColumn<Part, Integer> productPartID;
-    @FXML private TableColumn<Part, String> productPartName;
-    @FXML private TableColumn<Part, Double> productPartPrice;
-    @FXML private TableColumn<Part, Integer> productPartInStock;
+    @FXML
+    private Button productSearchButton;
+    @FXML
+    private TextField productSearchField;
+    @FXML
+    private Button productPartAddButton;
+    @FXML
+    private Button productPartDeleteButton;
+    @FXML
+    private Button productSaveButton;
+    @FXML
+    private Button productCancelButton;
+    @FXML
+    Label productIDLabel;
+    @FXML
+    Label productNameLabel;
+    @FXML
+    Label productInvLabel;
+    @FXML
+    Label productPriceLabel;
+    @FXML
+    Label productMaxLabel;
+    @FXML
+    Label productMinLabel;
+    @FXML
+    TextField editproductIDField;
+    @FXML
+    TextField editproductNameField;
+    @FXML
+    TextField editproductInvField;
+    @FXML
+    TextField editproductPriceField;
+    @FXML
+    TextField editproductMaxField;
+    @FXML
+    TextField editproductMinField;
+    
+    @FXML
+    private TableView<Part> productPartsSearchResultsTable;
+    @FXML
+    private TableColumn<Part, Integer> productID;
+    @FXML
+    private TableColumn<Part, String> productName;
+    @FXML
+    private TableColumn<Part, Double> productPrice;
+    @FXML
+    private TableColumn<Part, Integer> productInStock;
+    
+    @FXML
+    private TableView<Part> productPartsTable;
+    @FXML
+    private TableColumn<Part, Integer> productPartID;
+    @FXML
+    private TableColumn<Part, String> productPartName;
+    @FXML
+    private TableColumn<Part, Double> productPartPrice;
+    @FXML
+    private TableColumn<Part, Integer> productPartInStock;
     
     static Product tempProduct;
     
     @FXML
-    private void editproduct(Event event) throws IOException{
-        if(MainScreenController.productData.contains(tempProduct)) {
+    private void editproduct(Event event) throws IOException {
+        if (MainScreenController.productData.contains(tempProduct)) {
             tempProduct = new Product(Integer.parseInt(editproductIDField.getText()),
-                                      editproductNameField.getText(),
-                                      Double.parseDouble(editproductPriceField.getText()),
-                                      Integer.parseInt(editproductInvField.getText()),
-                                      Integer.parseInt(editproductMinField.getText()),
-                                      Integer.parseInt(editproductMaxField.getText()));
+                    editproductNameField.getText(),
+                    Double.parseDouble(editproductPriceField.getText()),
+                    Integer.parseInt(editproductInvField.getText()),
+                    Integer.parseInt(editproductMinField.getText()),
+                    Integer.parseInt(editproductMaxField.getText()));
             MainScreenController.productData.set(MainScreenController.getTempProductIndex(), tempProduct);
             Stage stage = (Stage) productSaveButton.getScene().getWindow();
             Parent root = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
@@ -90,16 +110,19 @@ public class EditProductController implements Initializable {
     }
     
     @FXML
-    private void addproductCancel() throws IOException{
+    private void addproductCancel() throws IOException {
         Stage stage = (Stage) productCancelButton.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
-    
+
     /**
      * Initializes the controller class.
+     *
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
