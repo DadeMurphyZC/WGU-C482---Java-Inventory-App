@@ -23,6 +23,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import inventorymanagement.Product;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 /**
  * FXML Controller class
@@ -30,7 +31,10 @@ import inventorymanagement.Product;
  * @author cfonseca
  */
 public class AddProductController implements Initializable {
-
+    
+    static Part tempProductPart;
+    static Product tempProduct;
+    
     @FXML private Button productSearchButton;
     @FXML private TextField productSearchField;
     @FXML private Button productPartAddButton;
@@ -50,17 +54,17 @@ public class AddProductController implements Initializable {
     @FXML TextField productMaxField;
     @FXML TextField productMinField;
 
-    @FXML private TableView<Product> productPartsSearchResultsTable;
-    @FXML private TableColumn<Product, Integer> productID;
-    @FXML private TableColumn<Product, String> productName;
-    @FXML private TableColumn<Product, Double> productPrice;
-    @FXML private TableColumn<Product, Integer> productInStock;
+    @FXML private TableView<Part> productPartsSearchResultsTable;
+    @FXML private TableColumn<Part, Integer> productID;
+    @FXML private TableColumn<Part, String> productName;
+    @FXML private TableColumn<Part, Double> productPrice;
+    @FXML private TableColumn<Part, Integer> productInStock;
 
-    @FXML private TableView<Product> productPartsTable;
-    @FXML private TableColumn<Product, Integer> productPartID;
-    @FXML private TableColumn<Product, String> productPartName;
-    @FXML private TableColumn<Product, Double> productPartPrice;
-    @FXML private TableColumn<Product, Integer> productPartInStock;
+    @FXML private TableView<Part> productPartsTable;
+    @FXML private TableColumn<Part, Integer> productPartID;
+    @FXML private TableColumn<Part, String> productPartName;
+    @FXML private TableColumn<Part, Double> productPartPrice;
+    @FXML private TableColumn<Part, Integer> productPartInStock;
     
     @FXML
     private void addproductCancel() throws IOException{
@@ -73,18 +77,28 @@ public class AddProductController implements Initializable {
     
     @FXML
     private void addproduct(Event event) throws IOException{
-        Product tempProduct = new Product(Integer.parseInt(productIDField.getText()),
+        tempProduct = new Product(Integer.parseInt(productIDField.getText()),
             productNameField.getText(),
             Double.parseDouble(productPriceField.getText()),
             Integer.parseInt(productInvField.getText()),
             Integer.parseInt(productMinField.getText()),
             Integer.parseInt(productMaxField.getText()));
         MainScreenController.productData.add(tempProduct);
+        for(Part p: productParts){
+            tempProduct.addAssociatedPart(p);
+        }
+        productParts.clear();
+        tempProduct = null;
         Stage stage = (Stage) productSaveButton.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
-        stage.show();
+        stage.show();   
+    }
+    
+    @FXML private void addproductpart(Event event) throws IOException {
+        tempProductPart = productPartsSearchResultsTable.getSelectionModel().getSelectedItem();
+        productParts.add(tempProductPart);
     }
 
     static ObservableList<Part> productPartsSearchResults = FXCollections.observableArrayList(
@@ -92,17 +106,23 @@ public class AddProductController implements Initializable {
             new Part(2,"test2",4.99,1,1,1)
     );
 
-    static ObservableList<Part> productParts = FXCollections.observableArrayList(
-            new Part(1, "test", 3.99, 1,1,1),
-            new Part(2,"test2",4.99,1,1,1)
-    );
+    public static ObservableList<Part> productParts = FXCollections.observableArrayList();
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        productID.setCellValueFactory(new PropertyValueFactory<>("partID"));
+        productName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        productPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
+        productInStock.setCellValueFactory(new PropertyValueFactory<>("inStock"));
+        productPartsSearchResultsTable.setItems(MainScreenController.data);
+        productPartID.setCellValueFactory(new PropertyValueFactory<>("partID"));
+        productPartName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        productPartPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
+        productPartInStock.setCellValueFactory(new PropertyValueFactory<>("inStock"));
+        productPartsTable.setItems(productParts);
     }
 
 }
