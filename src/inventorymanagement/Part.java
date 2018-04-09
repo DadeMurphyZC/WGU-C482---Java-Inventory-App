@@ -10,14 +10,15 @@ package inventorymanagement;
  * @author cris
  */
 public class Part {
+
     int partID;
     String name;
     double price;
     int inStock;
     int min;
     int max;
-    
-    Part(int partID, String name, double price, int inStock, int min, int max){
+
+    Part(int partID, String name, double price, int inStock, int min, int max) {
         this.partID = partID;
         this.name = name;
         this.price = price;
@@ -25,7 +26,7 @@ public class Part {
         this.min = min;
         this.max = max;
     }
-    
+
     public int getPartID() {
         return partID;
     }
@@ -73,5 +74,5 @@ public class Part {
     public void setMax(int max) {
         this.max = max;
     }
-    
+
 }
