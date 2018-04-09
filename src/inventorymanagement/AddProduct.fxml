@@ -51,7 +51,7 @@
                                 <TableColumn fx:id="productPrice" prefWidth="93.0" text="Price Per Unit" />
                             </columns>
                         </TableView>
-                        <Button fx:id="productPartAddButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" text="Add" translateX="310.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Button fx:id="productPartAddButton" mnemonicParsing="false" onAction="#addproductpart" prefHeight="25.0" prefWidth="60.0" text="Add" translateX="310.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                         <TableView fx:id="productPartsTable" maxWidth="-Infinity" prefHeight="136.0" prefWidth="372.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                             <columns>
                                 <TableColumn fx:id="productPartID" prefWidth="93.0" text="Part ID" />
