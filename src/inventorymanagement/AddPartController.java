@@ -53,10 +53,10 @@ public class AddPartController implements Initializable {
     @FXML
     private void addpartradioswitch(ActionEvent event){
         if(addpartinhouse.isSelected()){
-            addpartchoicelabel.setText("Top Kek");
+            addpartchoicelabel.setText("Machine ID");
         }
         if(addpartoutsourced.isSelected()) {
-            addpartchoicelabel.setText("Lul");
+            addpartchoicelabel.setText("Company Name");
         }
     }
     
