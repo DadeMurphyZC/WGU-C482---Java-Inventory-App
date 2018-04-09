@@ -14,22 +14,18 @@ import javafx.scene.control.ButtonType;
  * @author cfonseca
  */
 public class Confirm {
-    
-    public static boolean delete(){
+
+    public static boolean delete() {
         Boolean choice;
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Please confirm:");
         alert.setHeaderText(null);
         alert.setContentText("Are you sure you want to delete this part?");
         Optional<ButtonType> result = alert.showAndWait();
-        if(result.get() == ButtonType.OK){
-            choice = true;
-        } else {
-            choice = false;
-        }
+        choice = result.get() == ButtonType.OK;
         return choice;
     }
-    
+
     public static boolean cancel() {
         Boolean cancelChoice;
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -37,12 +33,8 @@ public class Confirm {
         alert.setHeaderText(null);
         alert.setContentText("Are you sure you want to cancel and go back?");
         Optional<ButtonType> cancelResult = alert.showAndWait();
-        if(cancelResult.get() == ButtonType.OK) {
-            cancelChoice = true;
-        } else {
-            cancelChoice = false;
-        }
+        cancelChoice = cancelResult.get() == ButtonType.OK;
         return cancelChoice;
     }
-    
+
 }
