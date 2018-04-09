@@ -5,6 +5,7 @@
  */
 package inventorymanagement;
 
+import static inventorymanagement.AddProductController.productParts;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -23,6 +24,9 @@ import static inventorymanagement.MainScreenController.getTempPartIndex;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 /**
@@ -48,15 +52,27 @@ public class EditPartController implements Initializable {
     @FXML private TextField editpartMin;
     @FXML private TextField editpartCName; 
     
+    @FXML private TableView<Part> productPartsSearchResultsTable;
+    @FXML private TableColumn<Part, Integer> productID;
+    @FXML private TableColumn<Part, String> productName;
+    @FXML private TableColumn<Part, Double> productPrice;
+    @FXML private TableColumn<Part, Integer> productInStock;
+
+    @FXML private TableView<Part> productPartsTable;
+    @FXML private TableColumn<Part, Integer> productPartID;
+    @FXML private TableColumn<Part, String> productPartName;
+    @FXML private TableColumn<Part, Double> productPartPrice;
+    @FXML private TableColumn<Part, Integer> productPartInStock;
+    
     static Part tempPart;
     
     @FXML
     private void editpartradioswitch(ActionEvent event){
         if(editpartinhouse.isSelected()){
-            editpartchoicelabel.setText("Top Kek");
+            editpartchoicelabel.setText("Machine ID");
         }
         if(editpartoutsourced.isSelected()) {
-            editpartchoicelabel.setText("Lul");
+            editpartchoicelabel.setText("Company Name");
         }
     }
     
@@ -111,7 +127,18 @@ public class EditPartController implements Initializable {
         editpartInv.setText(Integer.toString(tempPart.getInStock()));
         editpartPrice.setText(Double.toString(tempPart.getPrice()));
         editpartMax.setText(Integer.toString(tempPart.getMax()));
-        editpartMin.setText(Integer.toString(tempPart.getMin()));  
+        editpartMin.setText(Integer.toString(tempPart.getMin()));
+        productID.setCellValueFactory(new PropertyValueFactory<>("partID"));
+        productName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        productPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
+        productInStock.setCellValueFactory(new PropertyValueFactory<>("inStock"));
+        productPartsSearchResultsTable.setItems(MainScreenController.data);
+        productPartID.setCellValueFactory(new PropertyValueFactory<>("partID"));
+        productPartName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        productPartPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
+        productPartInStock.setCellValueFactory(new PropertyValueFactory<>("inStock"));
+        productPartsTable.setItems(productParts);
+        
     }    
     
 }
