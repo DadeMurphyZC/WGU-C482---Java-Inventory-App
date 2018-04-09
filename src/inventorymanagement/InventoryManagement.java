@@ -16,7 +16,7 @@ import javafx.stage.Stage;
  * @author cris
  */
 public class InventoryManagement extends Application {
-    
+
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
@@ -31,5 +31,5 @@ public class InventoryManagement extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
+
 }
