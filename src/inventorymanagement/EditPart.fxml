@@ -30,7 +30,7 @@
          <toggleGroup>
             <ToggleGroup fx:id="edittoggle" />
          </toggleGroup></RadioButton>
-      <RadioButton fx:id="editpartoutsourced" mnemonicParsing="false" onAction="#editpartradioswitch" text="Outsourced" toggleGroup="$addtoggle" translateX="200.0" />
+      <RadioButton fx:id="editpartoutsourced" mnemonicParsing="false" onAction="#editpartradioswitch" text="Outsourced" toggleGroup="$edittoggle" translateX="200.0" />
       <VBox prefHeight="198.0" prefWidth="782.0" GridPane.rowIndex="1">
          <children>
             <GridPane>
