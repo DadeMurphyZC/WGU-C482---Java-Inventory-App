@@ -47,6 +47,8 @@ public class MainScreenController implements Initializable {
         return tempProductIndex;
     }
     
+    public static Product selectedProduct;
+    
 
     @FXML private Label mainScreenLabel;
     @FXML private Button addPartButton;
@@ -97,6 +99,7 @@ public class MainScreenController implements Initializable {
     @FXML
     void setEditProductScene(Event event) throws IOException {
         tempProductIndex = productsTable.getSelectionModel().getSelectedIndex();
+        selectedProduct = productsTable.getSelectionModel().getSelectedItem();
         System.out.println(tempProductIndex);
         Stage stage = (Stage) editProductButton.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("EditProduct.fxml"));
