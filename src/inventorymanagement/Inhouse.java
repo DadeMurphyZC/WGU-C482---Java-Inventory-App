@@ -10,6 +10,7 @@ package inventorymanagement;
  * @author Cristoval Fonseca
  */
 public class Inhouse {
+
     int machineID;
 
     public int getMachineID() {
@@ -19,6 +20,5 @@ public class Inhouse {
     public void setMachineID(int machineID) {
         this.machineID = machineID;
     }
-    
-   
+
 }
