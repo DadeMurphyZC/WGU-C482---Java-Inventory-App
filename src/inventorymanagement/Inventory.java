@@ -14,7 +14,7 @@ import javafx.collections.ObservableList;
  * @author cris
  */
 public class Inventory {
-    private static ArrayList<Product> products;
+    private static ObservableList<Product> products = FXCollections.observableArrayList();
     private static ObservableList<Part> allParts = FXCollections.observableArrayList();
     
     public Inventory(){
@@ -33,11 +33,11 @@ public class Inventory {
         return true;
     }
 
-    public static ArrayList<Product> getProducts() {
+    public static ObservableList<Product> getProducts() {
         return products;
     }
 
-    public void setProducts(ArrayList<Product> products) {
+    public void setProducts(ObservableList<Product> products) {
         this.products = products;
     }
 
