@@ -23,9 +23,10 @@ public class Product {
         this.inStock = inStock;
         this.min = min;
         this.max = max;
+        this.associatedParts = FXCollections.observableArrayList();
     }
     
-    private static ObservableList<Part> associatedParts = FXCollections.observableArrayList();
+    private ObservableList<Part> associatedParts = FXCollections.observableArrayList();
     int productID;
     String name;
     double price;
