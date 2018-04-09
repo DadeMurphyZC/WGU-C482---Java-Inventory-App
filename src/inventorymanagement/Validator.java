@@ -14,8 +14,8 @@ import javafx.scene.control.TextField;
  * @author cfonseca
  */
 public class Validator {
-    
-    public static boolean isInt(TextField input){
+
+    public static boolean isInt(TextField input) {
         try {
             Integer.parseInt(input.getText());
             return true;
@@ -23,15 +23,11 @@ public class Validator {
             return false;
         }
     }
-    
-    public static boolean isminmaxValid(TextField min, TextField max){
-        if(Integer.parseInt(min.getText()) > Integer.parseInt(max.getText())){
-            return false;
-        } else {
-            return true;
-        }
+
+    public static boolean isminmaxValid(TextField min, TextField max) {
+        return Integer.parseInt(min.getText()) <= Integer.parseInt(max.getText());
     }
-    
+
     public static void showAlert(String message) {
         Alert alert = new Alert(AlertType.WARNING);
         alert.setTitle("Error");
@@ -39,5 +35,5 @@ public class Validator {
         alert.setContentText(message);
         alert.showAndWait();
     }
-    
+
 }
