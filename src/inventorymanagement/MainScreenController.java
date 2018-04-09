@@ -25,10 +25,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import static inventorymanagement.Inventory.lookupPart;
 import static inventorymanagement.Inventory.lookupProduct;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.ButtonType;
-import java.util.Optional;
 
 /**
  * FXML Controller class
@@ -38,42 +34,65 @@ import java.util.Optional;
 public class MainScreenController implements Initializable {
 
     private static int tempPartIndex;
+
     public static int getTempPartIndex() {
         return tempPartIndex;
     }
-    
+
     private static int tempProductIndex;
+
     public static int getTempProductIndex() {
         return tempProductIndex;
     }
-    
+
     public static Product selectedProduct;
-    
 
-    @FXML private Label mainScreenLabel;
-    @FXML private Button addPartButton;
-    @FXML private Button addProductButton;
-    @FXML private Button editPartButton;
-    @FXML private Button searchPartButton;
-    @FXML private Button clearSearchPartButton;
-    @FXML private TextField searchField;
-    @FXML private TextField searchProductField;
-    @FXML private Button searchProductButton;
-    @FXML private Button clearSearchProductButton;
-    @FXML private Button deleteProductButton;
-    @FXML private Button editProductButton;
+    @FXML
+    private Label mainScreenLabel;
+    @FXML
+    private Button addPartButton;
+    @FXML
+    private Button addProductButton;
+    @FXML
+    private Button editPartButton;
+    @FXML
+    private Button searchPartButton;
+    @FXML
+    private Button clearSearchPartButton;
+    @FXML
+    private TextField searchField;
+    @FXML
+    private TextField searchProductField;
+    @FXML
+    private Button searchProductButton;
+    @FXML
+    private Button clearSearchProductButton;
+    @FXML
+    private Button deleteProductButton;
+    @FXML
+    private Button editProductButton;
 
-    @FXML private TableView<Part> partsTable;
-    @FXML private TableColumn<Part, Integer> partIDCol;
-    @FXML private TableColumn<Part, String> name;
-    @FXML private TableColumn<Part, Double> price;
-    @FXML private TableColumn<Part, Integer> inStock;
+    @FXML
+    private TableView<Part> partsTable;
+    @FXML
+    private TableColumn<Part, Integer> partIDCol;
+    @FXML
+    private TableColumn<Part, String> name;
+    @FXML
+    private TableColumn<Part, Double> price;
+    @FXML
+    private TableColumn<Part, Integer> inStock;
 
-    @FXML private TableView<Product> productsTable;
-    @FXML private TableColumn<Product, Integer> productIDCol;
-    @FXML private TableColumn<Product, String> productName;
-    @FXML private TableColumn<Product, Double> productPrice;
-    @FXML private TableColumn<Product, Integer> productinStock;
+    @FXML
+    private TableView<Product> productsTable;
+    @FXML
+    private TableColumn<Product, Integer> productIDCol;
+    @FXML
+    private TableColumn<Product, String> productName;
+    @FXML
+    private TableColumn<Product, Double> productPrice;
+    @FXML
+    private TableColumn<Product, Integer> productinStock;
 
     //MAPS THE ADD BUTTON TO setAddPartScene AND CHANGES TO THE Add Part VIEW
     @FXML
@@ -95,7 +114,7 @@ public class MainScreenController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-    
+
     @FXML
     void setEditProductScene(Event event) throws IOException {
         tempProductIndex = productsTable.getSelectionModel().getSelectedIndex();
@@ -121,14 +140,14 @@ public class MainScreenController implements Initializable {
     @FXML
     private void deletepart(Event event) throws IOException {
         tempPartIndex = partsTable.getSelectionModel().getSelectedIndex();
-        if(Confirm.delete()==true){
+        if (Confirm.delete() == true) {
             if (data.contains(data.get(tempPartIndex))) {
                 data.remove(tempPartIndex);
             }
-        partsTable.setItems(data);
+            partsTable.setItems(data);
         }
     }
-    
+
     @FXML
     private void deleteproduct(Event event) throws IOException {
         tempProductIndex = productsTable.getSelectionModel().getSelectedIndex();
@@ -153,14 +172,14 @@ public class MainScreenController implements Initializable {
             partsTable.setItems(searchTable);
         }
     }
-    
+
     @FXML
     private void searchProduct() {
         int search = Integer.parseInt(searchProductField.getText());
         System.out.println(search);
         Product tempProduct = lookupProduct(search);
         if (tempProduct != null) {
-            ObservableList<Product> searchProductTable 
+            ObservableList<Product> searchProductTable
                     = FXCollections.observableArrayList(new Product(tempProduct.getProductID(),
                             tempProduct.getName(),
                             tempProduct.getPrice(),
@@ -176,7 +195,7 @@ public class MainScreenController implements Initializable {
         searchField.setText("");
         partsTable.setItems(data);
     }
-    
+
     @FXML
     private void clearProductSearch() {
         searchProductField.setText("");
