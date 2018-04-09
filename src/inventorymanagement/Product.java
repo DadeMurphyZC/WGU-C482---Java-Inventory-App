@@ -5,9 +5,7 @@
  */
 package inventorymanagement;
 
-import java.util.ArrayList;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
 
 /**
@@ -25,7 +23,7 @@ public class Product {
         this.max = max;
         this.associatedParts = FXCollections.observableArrayList();
     }
-    
+
     private ObservableList<Part> associatedParts = FXCollections.observableArrayList();
     int productID;
     String name;
@@ -33,12 +31,11 @@ public class Product {
     int inStock;
     int min;
     int max;
-    
-    
-    public void addAssociatedPart(Part part){
+
+    public void addAssociatedPart(Part part) {
         associatedParts.add(part);
     }
-    
+
     public ObservableList<Part> getAssociatedParts() {
         return associatedParts;
     }
@@ -94,6 +91,5 @@ public class Product {
     public void setMax(int max) {
         this.max = max;
     }
-    
-    
+
 }
