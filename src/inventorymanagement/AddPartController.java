@@ -7,7 +7,6 @@ package inventorymanagement;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -16,17 +15,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
-import inventorymanagement.Part;
 import java.io.IOException;
 import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import static inventorymanagement.Validator.isminmaxValid;
-import static inventorymanagement.Validator.showAlert;
 
 /**
  * FXML Controller class
@@ -35,56 +29,69 @@ import static inventorymanagement.Validator.showAlert;
  */
 public class AddPartController implements Initializable {
 
-    @FXML private Label mainScreenLabel;
-    @FXML private ToggleGroup addtoggle;
-    @FXML private Button addpartsave;
-    @FXML private Button addpartcancel;
-    @FXML private Label addpartchoicelabel;
-    @FXML private RadioButton addpartinhouse;
-    @FXML private RadioButton addpartoutsourced;
-    @FXML private TextField addpartId;
-    @FXML private TextField addpartName;
-    @FXML private TextField addpartInv;
-    @FXML private TextField addpartPrice;
-    @FXML private TextField addpartMax;
-    @FXML private TextField addpartMin;
-    @FXML private TextField addpartCName;
-    
     @FXML
-    private void addpartradioswitch(ActionEvent event){
-        if(addpartinhouse.isSelected()){
+    private Label mainScreenLabel;
+    @FXML
+    private ToggleGroup addtoggle;
+    @FXML
+    private Button addpartsave;
+    @FXML
+    private Button addpartcancel;
+    @FXML
+    private Label addpartchoicelabel;
+    @FXML
+    private RadioButton addpartinhouse;
+    @FXML
+    private RadioButton addpartoutsourced;
+    @FXML
+    private TextField addpartId;
+    @FXML
+    private TextField addpartName;
+    @FXML
+    private TextField addpartInv;
+    @FXML
+    private TextField addpartPrice;
+    @FXML
+    private TextField addpartMax;
+    @FXML
+    private TextField addpartMin;
+    @FXML
+    private TextField addpartCName;
+
+    @FXML
+    private void addpartradioswitch(ActionEvent event) {
+        if (addpartinhouse.isSelected()) {
             addpartchoicelabel.setText("Machine ID");
         }
-        if(addpartoutsourced.isSelected()) {
+        if (addpartoutsourced.isSelected()) {
             addpartchoicelabel.setText("Company Name");
         }
     }
-    
-    
+
     @FXML
-    private void addpart(Event event) throws IOException{
+    private void addpart(Event event) throws IOException {
         boolean minmaxvalid = Validator.isminmaxValid(addpartMin, addpartMax);
-        if(minmaxvalid == true){
+        if (minmaxvalid == true) {
             Part tempPart = new Part(Integer.parseInt(addpartId.getText()),
-            addpartName.getText(),
-            Double.parseDouble(addpartPrice.getText()),
-            Integer.parseInt(addpartInv.getText()),
-            Integer.parseInt(addpartMin.getText()),
-            Integer.parseInt(addpartMax.getText()));
-        MainScreenController.data.add(tempPart);
-        Stage stage = (Stage) addpartsave.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+                    addpartName.getText(),
+                    Double.parseDouble(addpartPrice.getText()),
+                    Integer.parseInt(addpartInv.getText()),
+                    Integer.parseInt(addpartMin.getText()),
+                    Integer.parseInt(addpartMax.getText()));
+            MainScreenController.data.add(tempPart);
+            Stage stage = (Stage) addpartsave.getScene().getWindow();
+            Parent root = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
         } else {
             Validator.showAlert("MIN value cannot be greater than MAX value.");
         }
-        
+
     }
-    
+
     @FXML
-    private void addpartCancel() throws IOException{
+    private void addpartCancel() throws IOException {
         Stage stage = (Stage) addpartcancel.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
         Scene scene = new Scene(root);
@@ -94,6 +101,7 @@ public class AddPartController implements Initializable {
 
     /**
      * Initializes the controller class.
+     *
      * @param url
      * @param rb
      */
