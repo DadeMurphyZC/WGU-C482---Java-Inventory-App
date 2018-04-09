@@ -5,7 +5,6 @@
  */
 package inventorymanagement;
 
-import java.util.ArrayList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -14,22 +13,21 @@ import javafx.collections.ObservableList;
  * @author cris
  */
 public class Inventory {
+
     private static ObservableList<Product> products = FXCollections.observableArrayList();
     private static ObservableList<Part> allParts = FXCollections.observableArrayList();
-    
-    public Inventory(){
+
+    public Inventory() {
     }
-    
-    public void addProduct(Product product){
+
+    public void addProduct(Product product) {
         products.add(product);
     }
-    
-    public boolean removeProduct(int id){
-        for(Product p: products){
-            if(p.getProductID() == id){
-                products.remove(p);
-            }
-        }
+
+    public boolean removeProduct(int id) {
+        products.stream().filter((p) -> (p.getProductID() == id)).forEachOrdered((p) -> {
+            products.remove(p);
+        });
         return true;
     }
 
@@ -38,7 +36,7 @@ public class Inventory {
     }
 
     public void setProducts(ObservableList<Product> products) {
-        this.products = products;
+        Inventory.products = products;
     }
 
     public static ObservableList<Part> getAllParts() {
@@ -46,53 +44,47 @@ public class Inventory {
     }
 
     public void setAllParts(ObservableList<Part> allParts) {
-        this.allParts = allParts;
+        Inventory.allParts = allParts;
     }
-    
-    public static Product lookupProduct(int id){
-       for(Product p: MainScreenController.productData){
-           if(p.getProductID() == id){
-               return p;
-           }
-       }
-       return null;
-    }
-    
-    public void updateProduct(int id){
-        for(Product p: products) {
-            if(p.getProductID() == id){
-                products.set(id, p);
-            }
-        }
-    }
-    
-    public void addPart(Part part){
-        allParts.add(part);
-    }
-    
-    public boolean deletePart(Part part){
-        for(Part p: allParts) {
-            if(p.getPartID() == part.partID){
-                allParts.remove(p);
-            }
-        }
-        return true;
-    }
-    
-    public static Part lookupPart(int id){
-        for(Part p: MainScreenController.data) {
-            if(p.getPartID() == id) {
-              return p;  
+
+    public static Product lookupProduct(int id) {
+        for (Product p : MainScreenController.productData) {
+            if (p.getProductID() == id) {
+                return p;
             }
         }
         return null;
     }
-    
-    public void updatePart(int id){
-        for (Part p: allParts){
-            if(p.getPartID() == id){
-                allParts.set(id, p);
+
+    public void updateProduct(int id) {
+        products.stream().filter((p) -> (p.getProductID() == id)).forEachOrdered((p) -> {
+            products.set(id, p);
+        });
+    }
+
+    public void addPart(Part part) {
+        allParts.add(part);
+    }
+
+    public boolean deletePart(Part part) {
+        allParts.stream().filter((p) -> (p.getPartID() == part.partID)).forEachOrdered((p) -> {
+            allParts.remove(p);
+        });
+        return true;
+    }
+
+    public static Part lookupPart(int id) {
+        for (Part p : MainScreenController.data) {
+            if (p.getPartID() == id) {
+                return p;
             }
         }
+        return null;
     }
-}   
+
+    public void updatePart(int id) {
+        allParts.stream().filter((p) -> (p.getPartID() == id)).forEachOrdered((p) -> {
+            allParts.set(id, p);
+        });
+    }
+}
