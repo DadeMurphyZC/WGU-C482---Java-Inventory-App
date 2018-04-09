@@ -30,4 +30,19 @@ public class Confirm {
         return choice;
     }
     
+    public static boolean cancel() {
+        Boolean cancelChoice;
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Please confirm:");
+        alert.setHeaderText(null);
+        alert.setContentText("Are you sure you want to cancel and go back?");
+        Optional<ButtonType> cancelResult = alert.showAndWait();
+        if(cancelResult.get() == ButtonType.OK) {
+            cancelChoice = true;
+        } else {
+            cancelChoice = false;
+        }
+        return cancelChoice;
+    }
+    
 }
