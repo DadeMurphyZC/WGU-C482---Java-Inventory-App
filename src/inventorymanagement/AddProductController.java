@@ -22,7 +22,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import inventorymanagement.Product;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 /**
@@ -31,79 +30,108 @@ import javafx.scene.control.cell.PropertyValueFactory;
  * @author cfonseca
  */
 public class AddProductController implements Initializable {
-    
+
     static Part tempProductPart;
     static Product tempProduct;
-    
-    @FXML private Button productSearchButton;
-    @FXML private TextField productSearchField;
-    @FXML private Button productPartAddButton;
-    @FXML private Button productPartDeleteButton;
-    @FXML private Button productSaveButton;
-    @FXML private Button productCancelButton;
-    @FXML Label productIDLabel;
-    @FXML Label productNameLabel;
-    @FXML Label productInvLabel;
-    @FXML Label productPriceLabel;
-    @FXML Label productMaxLabel;
-    @FXML Label productMinLabel;
-    @FXML TextField productIDField;
-    @FXML TextField productNameField;
-    @FXML TextField productInvField;
-    @FXML TextField productPriceField;
-    @FXML TextField productMaxField;
-    @FXML TextField productMinField;
 
-    @FXML private TableView<Part> productPartsSearchResultsTable;
-    @FXML private TableColumn<Part, Integer> productID;
-    @FXML private TableColumn<Part, String> productName;
-    @FXML private TableColumn<Part, Double> productPrice;
-    @FXML private TableColumn<Part, Integer> productInStock;
-
-    @FXML private TableView<Part> productPartsTable;
-    @FXML private TableColumn<Part, Integer> productPartID;
-    @FXML private TableColumn<Part, String> productPartName;
-    @FXML private TableColumn<Part, Double> productPartPrice;
-    @FXML private TableColumn<Part, Integer> productPartInStock;
-    
     @FXML
-    private void addproductCancel() throws IOException{
+    private Button productSearchButton;
+    @FXML
+    private TextField productSearchField;
+    @FXML
+    private Button productPartAddButton;
+    @FXML
+    private Button productPartDeleteButton;
+    @FXML
+    private Button productSaveButton;
+    @FXML
+    private Button productCancelButton;
+    @FXML
+    Label productIDLabel;
+    @FXML
+    Label productNameLabel;
+    @FXML
+    Label productInvLabel;
+    @FXML
+    Label productPriceLabel;
+    @FXML
+    Label productMaxLabel;
+    @FXML
+    Label productMinLabel;
+    @FXML
+    TextField productIDField;
+    @FXML
+    TextField productNameField;
+    @FXML
+    TextField productInvField;
+    @FXML
+    TextField productPriceField;
+    @FXML
+    TextField productMaxField;
+    @FXML
+    TextField productMinField;
+
+    @FXML
+    private TableView<Part> productPartsSearchResultsTable;
+    @FXML
+    private TableColumn<Part, Integer> productID;
+    @FXML
+    private TableColumn<Part, String> productName;
+    @FXML
+    private TableColumn<Part, Double> productPrice;
+    @FXML
+    private TableColumn<Part, Integer> productInStock;
+
+    @FXML
+    private TableView<Part> productPartsTable;
+    @FXML
+    private TableColumn<Part, Integer> productPartID;
+    @FXML
+    private TableColumn<Part, String> productPartName;
+    @FXML
+    private TableColumn<Part, Double> productPartPrice;
+    @FXML
+    private TableColumn<Part, Integer> productPartInStock;
+
+    @FXML
+    private void addproductCancel() throws IOException {
         Stage stage = (Stage) productCancelButton.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
-    
+
     @FXML
-    private void addproduct(Event event) throws IOException{
+    private void addproduct(Event event) throws IOException {
         tempProduct = new Product(Integer.parseInt(productIDField.getText()),
-            productNameField.getText(),
-            Double.parseDouble(productPriceField.getText()),
-            Integer.parseInt(productInvField.getText()),
-            Integer.parseInt(productMinField.getText()),
-            Integer.parseInt(productMaxField.getText()));
+                productNameField.getText(),
+                Double.parseDouble(productPriceField.getText()),
+                Integer.parseInt(productInvField.getText()),
+                Integer.parseInt(productMinField.getText()),
+                Integer.parseInt(productMaxField.getText()));
         MainScreenController.productData.add(tempProduct);
-        for(Part p: productParts){
+        productParts.forEach((p) -> {
             tempProduct.addAssociatedPart(p);
-        }
+        });
         productParts.clear();
         tempProduct = null;
         Stage stage = (Stage) productSaveButton.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
-        stage.show();   
+        stage.show();
     }
-    
-    @FXML private void addproductpart(Event event) throws IOException {
+
+    @FXML
+    private void addproductpart(Event event) throws IOException {
         tempProductPart = productPartsSearchResultsTable.getSelectionModel().getSelectedItem();
         productParts.add(tempProductPart);
     }
 
     static ObservableList<Part> productPartsSearchResults = FXCollections.observableArrayList(
-            new Part(1, "test", 3.99, 1,1,1),
-            new Part(2,"test2",4.99,1,1,1)
+            new Part(1, "test", 3.99, 1, 1, 1),
+            new Part(2, "test2", 4.99, 1, 1, 1)
     );
 
     public static ObservableList<Part> productParts = FXCollections.observableArrayList();
