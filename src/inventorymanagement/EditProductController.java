@@ -22,6 +22,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import static inventorymanagement.MainScreenController.selectedProduct;
+import static inventorymanagement.AddProductController.tempProductPart;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  * FXML Controller class
@@ -120,6 +123,14 @@ public class EditProductController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
+    
+    @FXML
+    private void editaddproductpart(Event event) throws IOException {
+        tempProductPart = productPartsSearchResultsTable.getSelectionModel().getSelectedItem();
+        tempProduct.addAssociatedPart(tempProductPart);
+    }
+    
+    static ObservableList<Part> productParts = FXCollections.observableArrayList();
 
     /**
      * Initializes the controller class.
