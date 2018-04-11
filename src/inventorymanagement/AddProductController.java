@@ -110,10 +110,10 @@ public class AddProductController implements Initializable {
                 Integer.parseInt(productInvField.getText()),
                 Integer.parseInt(productMinField.getText()),
                 Integer.parseInt(productMaxField.getText()));
-        MainScreenController.productData.add(tempProduct);
         productParts.forEach((p) -> {
             tempProduct.addAssociatedPart(p);
         });
+        MainScreenController.productData.add(tempProduct);
         productParts.clear();
         tempProduct = null;
         Stage stage = (Stage) productSaveButton.getScene().getWindow();
