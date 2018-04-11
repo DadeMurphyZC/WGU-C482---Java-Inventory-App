@@ -117,11 +117,13 @@ public class EditProductController implements Initializable {
     
     @FXML
     private void addproductCancel() throws IOException {
-        Stage stage = (Stage) productCancelButton.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        if(Confirm.cancel()==true){
+            Stage stage = (Stage) productCancelButton.getScene().getWindow();
+            Parent root = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        }
     }
     
     @FXML
@@ -132,8 +134,10 @@ public class EditProductController implements Initializable {
     
     @FXML
     private void editproductdelete(Event event) throws IOException {
-        tempProductPart = productPartsTable.getSelectionModel().getSelectedItem();
-        tempProduct.getAssociatedParts().remove(tempProductPart);
+        if(Confirm.delete()==true){
+            tempProductPart = productPartsTable.getSelectionModel().getSelectedItem();
+            tempProduct.getAssociatedParts().remove(tempProductPart);
+        }
     }
     
     static ObservableList<Part> productParts = FXCollections.observableArrayList();
