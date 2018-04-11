@@ -11,7 +11,7 @@ package inventorymanagement;
  */
 public class Inhouse {
 
-    int machineID;
+    private int machineID;
 
     public int getMachineID() {
         return machineID;
