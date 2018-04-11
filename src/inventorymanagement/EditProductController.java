@@ -151,7 +151,7 @@ public class EditProductController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         tempProduct = MainScreenController.productData.get(MainScreenController.getTempProductIndex());
-        System.out.println("Selected product is: " + selectedProduct.name);
+        System.out.println("Selected product is: " + selectedProduct.getName());
         System.out.println("Selected product associated parts are: " + selectedProduct.getAssociatedParts());
         productPartsTable.setItems(selectedProduct.getAssociatedParts());
         editproductIDField.setText(String.valueOf(tempProduct.getProductID()));
