@@ -11,12 +11,12 @@ package inventorymanagement;
  */
 public class Part {
 
-    int partID;
-    String name;
-    double price;
-    int inStock;
-    int min;
-    int max;
+    private int partID;
+    private String name;
+    private double price;
+    private int inStock;
+    private int min;
+    private int max;
 
     Part(int partID, String name, double price, int inStock, int min, int max) {
         this.partID = partID;
