@@ -11,7 +11,7 @@ package inventorymanagement;
  */
 public class Outsourced {
 
-    String companyName;
+    private String companyName;
 
     public String getCompanyName() {
         return companyName;
