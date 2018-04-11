@@ -12,17 +12,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 import javafx.scene.control.cell.PropertyValueFactory;
+import static inventorymanagement.Parser.parseDouble;
+import static inventorymanagement.Parser.parseInt;
 
 /**
  * FXML Controller class
@@ -95,32 +93,27 @@ public class AddProductController implements Initializable {
 
     @FXML
     private void addproductCancel() throws IOException {
-        Stage stage = (Stage) productCancelButton.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        if(Confirm.cancel()==true){
+            SceneSwitch tempCancelScene = new SceneSwitch(productCancelButton,"MainScreen.fxml");
+            tempCancelScene.sceneSwitch();
+        }
     }
 
     @FXML
     private void addproduct(Event event) throws IOException {
-        tempProduct = new Product(Integer.parseInt(productIDField.getText()),
-                productNameField.getText(),
-                Double.parseDouble(productPriceField.getText()),
-                Integer.parseInt(productInvField.getText()),
-                Integer.parseInt(productMinField.getText()),
-                Integer.parseInt(productMaxField.getText()));
-        productParts.forEach((p) -> {
-            tempProduct.addAssociatedPart(p);
-        });
+        tempProduct = new Product();
+            tempProduct.setProductID(parseInt(productNameField));
+            tempProduct.setName(productNameField.getText());
+            tempProduct.setPrice(parseDouble(productPriceField));
+            tempProduct.setInStock(parseInt(productInvField));
+            tempProduct.setMin(parseInt(productMinField));
+            tempProduct.setMax(parseInt(productMaxField));
+        productParts.forEach((p) -> {tempProduct.addAssociatedPart(p);});
         MainScreenController.productData.add(tempProduct);
         productParts.clear();
         tempProduct = null;
-        Stage stage = (Stage) productSaveButton.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        SceneSwitch tempAddScene = new SceneSwitch(productSaveButton,"MainScreen.fxml");
+        tempAddScene.sceneSwitch();
     }
 
     @FXML
