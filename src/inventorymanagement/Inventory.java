@@ -67,7 +67,7 @@ public class Inventory {
     }
 
     public boolean deletePart(Part part) {
-        allParts.stream().filter((p) -> (p.getPartID() == part.partID)).forEachOrdered((p) -> {
+        allParts.stream().filter((p) -> (p.getPartID() == part.getPartID())).forEachOrdered((p) -> {
             allParts.remove(p);
         });
         return true;
