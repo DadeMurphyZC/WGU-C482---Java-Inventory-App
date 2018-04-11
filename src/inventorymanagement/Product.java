@@ -13,6 +13,10 @@ import javafx.collections.ObservableList;
  * @author cris
  */
 public class Product {
+    
+    public Product(){
+        
+    };
 
     public Product(int productID, String name, double price, int inStock, int min, int max) {
         this.productID = productID;
