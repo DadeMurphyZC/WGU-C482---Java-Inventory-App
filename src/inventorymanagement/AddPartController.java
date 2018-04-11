@@ -79,11 +79,8 @@ public class AddPartController implements Initializable {
                     Integer.parseInt(addpartMin.getText()),
                     Integer.parseInt(addpartMax.getText()));
             MainScreenController.data.add(tempPart);
-            Stage stage = (Stage) addpartsave.getScene().getWindow();
-            Parent root = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
+            SceneSwitch addpartscene = new SceneSwitch(addpartsave, "MainScreen.fxml");
+            addpartscene.sceneSwitch();
         } else {
             Validator.showAlert("MIN value cannot be greater than MAX value.");
         }
@@ -92,11 +89,10 @@ public class AddPartController implements Initializable {
 
     @FXML
     private void addpartCancel() throws IOException {
-        Stage stage = (Stage) addpartcancel.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        if(Confirm.cancel()==true){
+            SceneSwitch addpartcancelscene = new SceneSwitch(addpartcancel, "MainScreen.fxml");
+            addpartcancelscene.sceneSwitch();
+        }
     }
 
     /**
