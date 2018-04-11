@@ -130,6 +130,12 @@ public class EditProductController implements Initializable {
         tempProduct.addAssociatedPart(tempProductPart);
     }
     
+    @FXML
+    private void editproductdelete(Event event) throws IOException {
+        tempProductPart = productPartsTable.getSelectionModel().getSelectedItem();
+        tempProduct.getAssociatedParts().remove(tempProductPart);
+    }
+    
     static ObservableList<Part> productParts = FXCollections.observableArrayList();
 
     /**
