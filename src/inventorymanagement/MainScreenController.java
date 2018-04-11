@@ -119,22 +119,14 @@ public class MainScreenController implements Initializable {
     void setEditProductScene(Event event) throws IOException {
         tempProductIndex = productsTable.getSelectionModel().getSelectedIndex();
         selectedProduct = productsTable.getSelectionModel().getSelectedItem();
-        System.out.println(tempProductIndex);
-        Stage stage = (Stage) editProductButton.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("EditProduct.fxml"));
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-        mainScreenLabel.setText("Edit Product");
+        SceneSwitch editProductScene = new SceneSwitch(editProductButton,"EditProduct.fxml");
+        editProductScene.sceneSwitch();
     }
 
     @FXML
     private void setAddProductScene(Event event) throws IOException {
-        Stage stage = (Stage) addProductButton.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("AddProduct.fxml"));
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        SceneSwitch addProductScene = new SceneSwitch(addProductButton, "AddProduct.fxml");
+        addProductScene.sceneSwitch();
     }
 
     @FXML
@@ -151,8 +143,10 @@ public class MainScreenController implements Initializable {
     @FXML
     private void deleteproduct(Event event) throws IOException {
         tempProductIndex = productsTable.getSelectionModel().getSelectedIndex();
-        if (productData.contains(productData.get(tempProductIndex))) {
-            productData.remove(tempProductIndex);
+        if(Confirm.delete() == true){
+            if (productData.contains(productData.get(tempProductIndex))) {
+                productData.remove(tempProductIndex);
+            }
         }
         productsTable.setItems(productData);
     }
