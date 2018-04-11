@@ -29,12 +29,12 @@ public class Product {
     }
 
     private ObservableList<Part> associatedParts = FXCollections.observableArrayList();
-    int productID;
-    String name;
-    double price;
-    int inStock;
-    int min;
-    int max;
+    private int productID;
+    private String name;
+    private double price;
+    private int inStock;
+    private int min;
+    private int max;
 
     public void addAssociatedPart(Part part) {
         associatedParts.add(part);
