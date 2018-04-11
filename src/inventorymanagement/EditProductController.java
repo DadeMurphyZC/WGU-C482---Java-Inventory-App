@@ -100,6 +100,9 @@ public class EditProductController implements Initializable {
                     Integer.parseInt(editproductInvField.getText()),
                     Integer.parseInt(editproductMinField.getText()),
                     Integer.parseInt(editproductMaxField.getText()));
+            productPartsTable.getItems().forEach((p) -> {
+                tempProduct.addAssociatedPart(p);
+            });
             MainScreenController.productData.set(MainScreenController.getTempProductIndex(), tempProduct);
             Stage stage = (Stage) productSaveButton.getScene().getWindow();
             Parent root = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
