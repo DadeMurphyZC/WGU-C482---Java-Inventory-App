@@ -20,7 +20,7 @@ public class Confirm {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Please confirm:");
         alert.setHeaderText(null);
-        alert.setContentText("Are you sure you want to delete this part?");
+        alert.setContentText("Are you sure you want to delete this item?");
         Optional<ButtonType> result = alert.showAndWait();
         choice = result.get() == ButtonType.OK;
         return choice;
