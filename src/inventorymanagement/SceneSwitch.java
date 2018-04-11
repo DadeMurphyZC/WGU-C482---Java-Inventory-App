@@ -18,8 +18,8 @@ import javafx.stage.Stage;
  */
 public class SceneSwitch {
     
-    Button button;
-    String file;
+    private Button button;
+    private String file;
     
     SceneSwitch(Button button, String file){
         this.button = button;
