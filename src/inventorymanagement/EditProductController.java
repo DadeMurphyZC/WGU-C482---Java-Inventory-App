@@ -11,20 +11,18 @@ import javafx.fxml.Initializable;
 import java.io.IOException;
 import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Stage;
 import static inventorymanagement.MainScreenController.selectedProduct;
 import static inventorymanagement.AddProductController.tempProductPart;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import static inventorymanagement.Parser.parseInt;
+import static inventorymanagement.Parser.parseDouble;
 
 /**
  * FXML Controller class
@@ -93,36 +91,32 @@ public class EditProductController implements Initializable {
     private TableColumn<Part, Integer> productPartInStock;
     
     static Product tempProduct;
+    static int tempProductIndex;
     
     @FXML
     private void editproduct(Event event) throws IOException {
         if (MainScreenController.productData.contains(tempProduct)) {
-            tempProduct = new Product(Integer.parseInt(editproductIDField.getText()),
-                    editproductNameField.getText(),
-                    Double.parseDouble(editproductPriceField.getText()),
-                    Integer.parseInt(editproductInvField.getText()),
-                    Integer.parseInt(editproductMinField.getText()),
-                    Integer.parseInt(editproductMaxField.getText()));
+            tempProduct = new Product();
+            tempProduct.setProductID(parseInt(editproductIDField));
+            tempProduct.setName(editproductNameField.getText());
+            tempProduct.setPrice(parseDouble(editproductPriceField));
+            tempProduct.setInStock(parseInt(editproductInvField));
+            tempProduct.setMin(parseInt(editproductMinField));
+            tempProduct.setMax(parseInt(editproductMaxField));
             productPartsTable.getItems().forEach((p) -> {
                 tempProduct.addAssociatedPart(p);
             });
-            MainScreenController.productData.set(MainScreenController.getTempProductIndex(), tempProduct);
-            Stage stage = (Stage) productSaveButton.getScene().getWindow();
-            Parent root = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
+            MainScreenController.productData.set(MainScreenController.getTempProductIndex(),tempProduct);
+            SceneSwitch tempeditproductscene = new SceneSwitch(productSaveButton,"MainScreen.fxml");
+            tempeditproductscene.sceneSwitch();
         }
     }
     
     @FXML
     private void addproductCancel() throws IOException {
         if(Confirm.cancel()==true){
-            Stage stage = (Stage) productCancelButton.getScene().getWindow();
-            Parent root = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
+            SceneSwitch tempcancelscene = new SceneSwitch(productCancelButton,"MainScreen.fxml");
+            tempcancelscene.sceneSwitch();
         }
     }
     
