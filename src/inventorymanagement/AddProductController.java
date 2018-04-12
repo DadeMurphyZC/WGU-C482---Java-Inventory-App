@@ -102,7 +102,7 @@ public class AddProductController implements Initializable {
     @FXML
     private void addproduct(Event event) throws IOException {
         tempProduct = new Product();
-            tempProduct.setProductID(parseInt(productNameField));
+            tempProduct.setProductID(parseInt(productIDField));
             tempProduct.setName(productNameField.getText());
             tempProduct.setPrice(parseDouble(productPriceField));
             tempProduct.setInStock(parseInt(productInvField));
