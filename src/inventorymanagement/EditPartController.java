@@ -17,9 +17,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
-import inventorymanagement.Inventory;
-import static inventorymanagement.Inventory.getAllParts;
-import static inventorymanagement.MainScreenController.getTempPartIndex;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -49,6 +46,7 @@ public class EditPartController implements Initializable {
     @FXML private TextField editpartCName; 
     
     static Part tempPart;
+    public static SceneSwitch editScene = new SceneSwitch();
     
     @FXML
     private void editpartradioswitch(ActionEvent event){
@@ -70,22 +68,19 @@ public class EditPartController implements Initializable {
                                 Integer.parseInt(editpartMax.getText()),
                                 Integer.parseInt(editpartMin.getText()));
             MainScreenController.data.set(MainScreenController.getTempPartIndex(), tempPart);
-            Stage stage = (Stage) editpartsave.getScene().getWindow();
-            Parent root = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
+            editScene.setButton(editpartsave);
+            editScene.setFile("MainScreen.fxml");
+            editScene.sceneSwitch();
+            
         }
     }
     
     @FXML
     private void editpartCancel() throws IOException{
         if(Confirm.cancel()==true){
-            Stage stage = (Stage) editpartcancel.getScene().getWindow();
-            Parent root = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
+            editScene.setButton(editpartcancel);
+            editScene.setFile("MainScreen.fxml");
+            editScene.sceneSwitch();
         }
     }
     
@@ -95,11 +90,9 @@ public class EditPartController implements Initializable {
             if(MainScreenController.data.contains(tempPart)){
                 MainScreenController.data.remove(tempPart);
             }
-            Stage stage = (Stage) editpartsave.getScene().getWindow();
-            Parent root = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
+            editScene.setButton(editpartsave);
+            editScene.setFile("MainScreen.fxml");
+            editScene.sceneSwitch();
         }
     }
     
