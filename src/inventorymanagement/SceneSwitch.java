@@ -19,7 +19,20 @@ import javafx.stage.Stage;
 public class SceneSwitch {
     
     private Button button;
+
+    public void setButton(Button button) {
+        this.button = button;
+    }
+
+    public void setFile(String file) {
+        this.file = file;
+    }
     private String file;
+    
+    SceneSwitch(){
+        this.button=null;
+        this.file=null;
+    }
     
     SceneSwitch(Button button, String file){
         this.button = button;
