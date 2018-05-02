@@ -16,11 +16,8 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import java.io.IOException;
+import java.util.concurrent.atomic.AtomicInteger;
 import javafx.event.Event;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -28,7 +25,10 @@ import javafx.stage.Stage;
  * @author cfonseca
  */
 public class AddPartController implements Initializable {
-
+    
+    static AtomicInteger partCount = new AtomicInteger();
+    static final Object addPartLock = new Object();
+    
     @FXML
     private Label mainScreenLabel;
     @FXML
@@ -57,7 +57,9 @@ public class AddPartController implements Initializable {
     private TextField addpartMin;
     @FXML
     private TextField addpartCName;
-
+    
+    
+    
     @FXML
     private void addpartradioswitch(ActionEvent event) {
         if (addpartinhouse.isSelected()) {
@@ -70,9 +72,10 @@ public class AddPartController implements Initializable {
 
     @FXML
     private void addpart(Event event) throws IOException {
+        synchronized(addPartLock){
         boolean minmaxvalid = Validator.isminmaxValid(addpartMin, addpartMax);
         if (minmaxvalid == true) {
-            Part tempPart = new Part(Integer.parseInt(addpartId.getText()),
+            Part tempPart = new Part(partCount.incrementAndGet(),
                     addpartName.getText(),
                     Double.parseDouble(addpartPrice.getText()),
                     Integer.parseInt(addpartInv.getText()),
@@ -83,7 +86,7 @@ public class AddPartController implements Initializable {
             addpartscene.sceneSwitch();
         } else {
             Validator.showAlert("MIN value cannot be greater than MAX value.");
-        }
+        }}
 
     }
 
@@ -103,6 +106,7 @@ public class AddPartController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO        
+        addpartId.setDisable(true);
+        addpartId.setText(partCount.get()+1+" (Auto-generated)");
     }
 }
