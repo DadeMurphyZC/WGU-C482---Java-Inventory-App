@@ -29,7 +29,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @author cfonseca
  */
 public class AddProductController implements Initializable {
-
+    
     static Part tempProductPart;
     static Product tempProduct;
     static AtomicInteger productCount = new AtomicInteger();
@@ -71,7 +71,7 @@ public class AddProductController implements Initializable {
     TextField productMaxField;
     @FXML
     TextField productMinField;
-
+    
     @FXML
     private TableView<Part> productPartsSearchResultsTable;
     @FXML
@@ -82,7 +82,7 @@ public class AddProductController implements Initializable {
     private TableColumn<Part, Double> productPrice;
     @FXML
     private TableColumn<Part, Integer> productInStock;
-
+    
     @FXML
     private TableView<Part> productPartsTable;
     @FXML
@@ -93,33 +93,39 @@ public class AddProductController implements Initializable {
     private TableColumn<Part, Double> productPartPrice;
     @FXML
     private TableColumn<Part, Integer> productPartInStock;
-
+    
     @FXML
     private void addproductCancel() throws IOException {
-        if(Confirm.cancel()==true){
-            SceneSwitch tempCancelScene = new SceneSwitch(productCancelButton,"MainScreen.fxml");
+        if (Confirm.cancel() == true) {
+            SceneSwitch tempCancelScene = new SceneSwitch(productCancelButton, "MainScreen.fxml");
             tempCancelScene.sceneSwitch();
         }
     }
-
+    
     @FXML
-    private void addproduct(Event event) throws IOException {       
-        synchronized(addProductLock){
-        tempProduct = new Product();
-            tempProduct.setProductID(productCount.incrementAndGet());
-            tempProduct.setName(productNameField.getText());
-            tempProduct.setPrice(parseDouble(productPriceField));
-            tempProduct.setInStock(parseInt(productInvField));
-            tempProduct.setMin(parseInt(productMinField));
-            tempProduct.setMax(parseInt(productMaxField));
-        productParts.forEach((p) -> {tempProduct.addAssociatedPart(p);});
-        MainScreenController.productData.add(tempProduct);
-        productParts.clear();
-        tempProduct = null;
-        SceneSwitch tempAddScene = new SceneSwitch(productSaveButton,"MainScreen.fxml");
-        tempAddScene.sceneSwitch();}
+    private void addproduct(Event event) throws IOException {        
+        synchronized (addProductLock) {
+                tempProduct = new Product();
+                tempProduct.setProductID(productCount.incrementAndGet());
+                tempProduct.setName(productNameField.getText());
+                tempProduct.setPrice(parseDouble(productPriceField));
+                tempProduct.setInStock(parseInt(productInvField));
+                tempProduct.setMin(parseInt(productMinField));
+                tempProduct.setMax(parseInt(productMaxField));
+                productParts.forEach((p) -> {tempProduct.addAssociatedPart(p);});
+                Validator.partMinimum(tempProduct);
+                if(Validator.partMinimum(tempProduct)!=true){
+                MainScreenController.productData.add(tempProduct);
+                productParts.clear();
+                tempProduct = null;
+                SceneSwitch tempAddScene = new SceneSwitch(productSaveButton, "MainScreen.fxml");
+                tempAddScene.sceneSwitch();
+                } else {
+                    Validator.showAlert("A product must always have at least one part.");
+                }
+        }
     }
-
+    
     @FXML
     private void addproductpart(Event event) throws IOException {
         tempProductPart = productPartsSearchResultsTable.getSelectionModel().getSelectedItem();
@@ -129,13 +135,13 @@ public class AddProductController implements Initializable {
     @FXML
     private void deleteproductpart(Event event) throws IOException {
         int tempProductIndex = productPartsTable.getSelectionModel().getSelectedIndex();
-        if(Confirm.delete()==true){
+        if (Confirm.delete() == true) {
             productPartsTable.getItems().remove(tempProductIndex);
         }
     }
-
+    
     static ObservableList<Part> productPartsSearchResults = FXCollections.observableArrayList();
-
+    
     public static ObservableList<Part> productParts = FXCollections.observableArrayList();
 
     /**
@@ -144,7 +150,7 @@ public class AddProductController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         productIDField.setDisable(true);
-        productIDField.setText(productCount.get()+1 + " (Auto-generated)");
+        productIDField.setText(productCount.get() + 1 + " (Auto-generated)");
         productID.setCellValueFactory(new PropertyValueFactory<>("partID"));
         productName.setCellValueFactory(new PropertyValueFactory<>("name"));
         productPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
@@ -156,5 +162,5 @@ public class AddProductController implements Initializable {
         productPartInStock.setCellValueFactory(new PropertyValueFactory<>("inStock"));
         productPartsTable.setItems(productParts);
     }
-
+    
 }
