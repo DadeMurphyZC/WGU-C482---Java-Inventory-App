@@ -15,7 +15,7 @@ import inventorymanagement.Parser;
  * @author cfonseca
  */
 public class Validator {
-    
+
     public static boolean isInt(TextField input) {
         try {
             Integer.parseInt(input.getText());
@@ -24,18 +24,26 @@ public class Validator {
             return false;
         }
     }
-    
-    public static boolean maxInv(TextField addpartInv, TextField addpartMax, TextField addpartMin){
-        if(Parser.parseInt(addpartInv)>=Parser.parseInt(addpartMin)&&
-           Parser.parseInt(addpartInv)<=Parser.parseInt(addpartMax)){
+
+    public static boolean maxInv(TextField addpartInv, TextField addpartMax, TextField addpartMin) {
+        if (Parser.parseInt(addpartInv) >= Parser.parseInt(addpartMin)
+                && Parser.parseInt(addpartInv) <= Parser.parseInt(addpartMax)) {
             return true;
         } else {
             return false;
         }
     }
-    
+
     public static boolean isminmaxValid(TextField min, TextField max) {
         return Integer.parseInt(min.getText()) <= Integer.parseInt(max.getText());
+    }
+
+    public static boolean partMinimum(Product p) {
+        if (p.getAssociatedParts().isEmpty()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public static void showAlert(String message) {
