@@ -100,7 +100,7 @@ public class EditPartController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         tempPart = MainScreenController.data.get(MainScreenController.getTempPartIndex());
-        System.out.println(tempPart.getName() + " " + tempPart.getPartID());
+        editpartId.setDisable(true);
         editpartId.setText(String.valueOf(tempPart.getPartID()));
         editpartName.setText(tempPart.getName());
         editpartInv.setText(Integer.toString(tempPart.getInStock()));
