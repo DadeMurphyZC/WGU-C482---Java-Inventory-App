@@ -21,6 +21,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import static inventorymanagement.Parser.parseDouble;
 import static inventorymanagement.Parser.parseInt;
+import static inventorymanagement.MainScreenController.getTempPartIndex;
 
 /**
  * FXML Controller class
@@ -120,6 +121,14 @@ public class AddProductController implements Initializable {
     private void addproductpart(Event event) throws IOException {
         tempProductPart = productPartsSearchResultsTable.getSelectionModel().getSelectedItem();
         productParts.add(tempProductPart);
+    }
+    
+    @FXML
+    private void deleteproductpart(Event event) throws IOException {
+        int tempProductIndex = productPartsTable.getSelectionModel().getSelectedIndex();
+        if(Confirm.delete()==true){
+            productPartsTable.getItems().remove(tempProductIndex);
+        }
     }
 
     static ObservableList<Part> productPartsSearchResults = FXCollections.observableArrayList(
