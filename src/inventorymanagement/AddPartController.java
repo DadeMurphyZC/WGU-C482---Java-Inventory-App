@@ -74,7 +74,8 @@ public class AddPartController implements Initializable {
     private void addpart(Event event) throws IOException {
         synchronized(addPartLock){
         boolean minmaxvalid = Validator.isminmaxValid(addpartMin, addpartMax);
-        if (minmaxvalid == true) {
+        boolean invvalid = Validator.maxInv(addpartInv, addpartMax, addpartMin);
+        if (minmaxvalid == true && invvalid == true ) {
             Part tempPart = new Part(partCount.incrementAndGet(),
                     addpartName.getText(),
                     Double.parseDouble(addpartPrice.getText()),
@@ -85,7 +86,8 @@ public class AddPartController implements Initializable {
             SceneSwitch addpartscene = new SceneSwitch(addpartsave, "MainScreen.fxml");
             addpartscene.sceneSwitch();
         } else {
-            Validator.showAlert("MIN value cannot be greater than MAX value.");
+            Validator.showAlert("\nPlease check the following: \n\nMIN value cannot be greater than MAX value."
+                    + "\nInv value must be between MIN and MAX values.");
         }}
 
     }
