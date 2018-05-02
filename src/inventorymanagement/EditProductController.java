@@ -107,8 +107,12 @@ public class EditProductController implements Initializable {
                 tempProduct.addAssociatedPart(p);
             });
             MainScreenController.productData.set(MainScreenController.getTempProductIndex(),tempProduct);
+            if(Validator.partMinimum(tempProduct)!=true){
             SceneSwitch tempeditproductscene = new SceneSwitch(productSaveButton,"MainScreen.fxml");
             tempeditproductscene.sceneSwitch();
+            } else {
+                Validator.showAlert("A product must have at least one part.");
+            }
         }
     }
     
