@@ -21,7 +21,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import static inventorymanagement.Parser.parseDouble;
 import static inventorymanagement.Parser.parseInt;
-import static inventorymanagement.MainScreenController.getTempPartIndex;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * FXML Controller class
@@ -32,7 +32,9 @@ public class AddProductController implements Initializable {
 
     static Part tempProductPart;
     static Product tempProduct;
-
+    static AtomicInteger productCount = new AtomicInteger();
+    private final Object addProductLock = new Object();
+    
     @FXML
     private Button productSearchButton;
     @FXML
@@ -101,9 +103,10 @@ public class AddProductController implements Initializable {
     }
 
     @FXML
-    private void addproduct(Event event) throws IOException {
+    private void addproduct(Event event) throws IOException {       
+        synchronized(addProductLock){
         tempProduct = new Product();
-            tempProduct.setProductID(parseInt(productIDField));
+            tempProduct.setProductID(productCount.incrementAndGet());
             tempProduct.setName(productNameField.getText());
             tempProduct.setPrice(parseDouble(productPriceField));
             tempProduct.setInStock(parseInt(productInvField));
@@ -114,7 +117,7 @@ public class AddProductController implements Initializable {
         productParts.clear();
         tempProduct = null;
         SceneSwitch tempAddScene = new SceneSwitch(productSaveButton,"MainScreen.fxml");
-        tempAddScene.sceneSwitch();
+        tempAddScene.sceneSwitch();}
     }
 
     @FXML
@@ -131,10 +134,7 @@ public class AddProductController implements Initializable {
         }
     }
 
-    static ObservableList<Part> productPartsSearchResults = FXCollections.observableArrayList(
-            new Part(1, "test", 3.99, 1, 1, 1),
-            new Part(2, "test2", 4.99, 1, 1, 1)
-    );
+    static ObservableList<Part> productPartsSearchResults = FXCollections.observableArrayList();
 
     public static ObservableList<Part> productParts = FXCollections.observableArrayList();
 
@@ -143,6 +143,8 @@ public class AddProductController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        productIDField.setDisable(true);
+        productIDField.setText(productCount.get()+1 + " (Auto-generated)");
         productID.setCellValueFactory(new PropertyValueFactory<>("partID"));
         productName.setCellValueFactory(new PropertyValueFactory<>("name"));
         productPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
