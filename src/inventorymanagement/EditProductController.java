@@ -148,6 +148,7 @@ public class EditProductController implements Initializable {
         System.out.println("Selected product is: " + selectedProduct.getName());
         System.out.println("Selected product associated parts are: " + selectedProduct.getAssociatedParts());
         productPartsTable.setItems(selectedProduct.getAssociatedParts());
+        editproductIDField.setDisable(true);
         editproductIDField.setText(String.valueOf(tempProduct.getProductID()));
         editproductNameField.setText(tempProduct.getName());
         editproductInvField.setText(Integer.toString(tempProduct.getInStock()));
