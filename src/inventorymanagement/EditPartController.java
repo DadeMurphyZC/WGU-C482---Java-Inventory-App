@@ -56,18 +56,24 @@ public class EditPartController implements Initializable {
     
     @FXML
     private void editpart(Event event) throws IOException{
-        if(MainScreenController.data.contains(tempPart)) {
+        if(Validator.isminmaxValid(editpartMin, editpartMax)&&
+           Validator.maxInv(editpartInv, editpartMax, editpartMin))
+        {   if(MainScreenController.data.contains(tempPart)) {
             tempPart = new Part(Integer.parseInt(editpartId.getText()),
                                 editpartName.getText(),
-                                Integer.parseInt(editpartInv.getText()), 
-                                (int) Double.parseDouble(editpartPrice.getText()),
-                                Integer.parseInt(editpartMax.getText()),
-                                Integer.parseInt(editpartMin.getText()));
+                                Double.parseDouble(editpartPrice.getText()),
+                                Integer.parseInt(editpartInv.getText()),
+                                Integer.parseInt(editpartMin.getText()),
+                                Integer.parseInt(editpartMax.getText()));
             MainScreenController.data.set(MainScreenController.getTempPartIndex(), tempPart);
             editScene.setButton(editpartsave);
             editScene.setFile("MainScreen.fxml");
             editScene.sceneSwitch();
-            
+            }
+        } else {
+            Validator.showAlert("\nPlease check the following: "
+                    + "\n\nMIN value cannot be greater than MAX value."
+                    + "\nInv value must be between MIN and MAX values.");
         }
     }
     
