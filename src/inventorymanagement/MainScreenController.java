@@ -196,15 +196,9 @@ public class MainScreenController implements Initializable {
         productsTable.setItems(productData);
     }
 
-    static ObservableList<Part> data = FXCollections.observableArrayList(
-            new Part(1, "test", 3.99, 1, 1, 1),
-            new Part(2, "test2", 4.99, 1, 1, 1)
-    );
+    static ObservableList<Part> data = FXCollections.observableArrayList();
 
-    static ObservableList<Product> productData = FXCollections.observableArrayList(
-            new Product(1, "test", 3.99, 1, 1, 1),
-            new Product(2, "test2", 4.99, 1, 1, 1)
-    );
+    static ObservableList<Product> productData = FXCollections.observableArrayList();
 
     /**
      * Initializes the controller class.
@@ -226,8 +220,6 @@ public class MainScreenController implements Initializable {
 
         partsTable.setItems(data);
         productsTable.setItems(productData);
-
-        // TODO
     }
 
 }
